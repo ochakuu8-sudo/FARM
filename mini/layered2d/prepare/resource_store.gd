@@ -62,7 +62,7 @@ var face_overrides:Dictionary={}
 func _init(load_all_bodies:bool=true) -> void:
 	shape_edges.fill(Color(1,1,1,1))
 	state_data.resize(8*Catalog.CAPACITY*4)
-	state_texture = ImageTexture.create_from_image(Image.create_from_data(8,Catalog.CAPACITY,false,Image.FORMAT_RGBAF,state_data.to_byte_array()))
+	state_texture = ImageTexture.create_from_image(gpu_bytes(8,Catalog.CAPACITY,state_data.to_byte_array()))
 	material.shader = load("res://mini/layered2d/render/cutout.gdshader")
 	set_param("actor_state",state_texture)
 	chart=Image.create(49,catalog.configs.size()*9,false,Image.FORMAT_RGBAF)
@@ -284,7 +284,7 @@ func publish_face(recipe: Dictionary, result: Dictionary) -> Dictionary:
 	var base:=append_face(recipe,result)
 	for layer in range(first_layer,(face_cell-1)/16+1):face_texture.update_layer(face_images[layer],layer)
 	write_view_table(base)
-	view_texture.update(view_image)
+	view_texture.update(gpu_table(view_image))
 	view_written=views.size()
 	return {"ok":true,"base":base}
 
@@ -404,6 +404,15 @@ func add_track(track: Dictionary) -> int:
 	dirty=true
 	return index
 
+## 32bit 浮動小数の表（RGBAF）を、同じバイト列のまま 8bit×4 の画素（RGBA8、横4倍）として GPU へ送る形にする。
+## iPhone など 32bit 浮動小数のテクスチャを使えない端末でも値が変わらない（シェーダーの fetch32 が元に戻す）。
+static func gpu_table(image: Image) -> Image:
+	assert(image.get_format()==Image.FORMAT_RGBAF)
+	return Image.create_from_data(image.get_width()*4,image.get_height(),false,Image.FORMAT_RGBA8,image.get_data())
+
+static func gpu_bytes(width: int,height: int,bytes: PackedByteArray) -> Image:
+	return Image.create_from_data(width*4,height,false,Image.FORMAT_RGBA8,bytes)
+
 func material_for(row: int) -> ShaderMaterial:
 	var m: ShaderMaterial=row_materials.get(row)
 	if m==null:
@@ -420,8 +429,8 @@ func set_param(name: String,value: Variant) -> void:
 func commit() -> void:
 	if not dirty:return
 	if shape_texture==null:
-		shape_texture=ImageTexture.create_from_image(shape_edges);set_param("shape_edges",shape_texture)
-	else:shape_texture.update(shape_edges)
+		shape_texture=ImageTexture.create_from_image(gpu_table(shape_edges));set_param("shape_edges",shape_texture)
+	else:shape_texture.update(gpu_table(shape_edges))
 	var reserved:=mini(64,ceili(float(face_cell)/16.0)+4)
 	while face_images.size()<reserved:face_images.append(Image.create(512,512,false,Image.FORMAT_RGBA8))
 	var motion := Texture2DArray.new()
@@ -458,17 +467,17 @@ func commit() -> void:
 	if view_texture==null or view_written>views.size():
 		view_image=Image.create(2,VIEW_CAPACITY,false,Image.FORMAT_RGBAF)
 		write_view_table()
-		view_texture=ImageTexture.create_from_image(view_image);set_param("view_table",view_texture)
+		view_texture=ImageTexture.create_from_image(gpu_table(view_image));set_param("view_table",view_texture)
 	else:
-		write_view_table(view_written);view_texture.update(view_image)
+		write_view_table(view_written);view_texture.update(gpu_table(view_image))
 	view_written=views.size()
 	if new_motion:set_param("motion_pages",motion)
 	motion_texture=motion
 	if binding_texture==null:
-		binding_texture=ImageTexture.create_from_image(binding);set_param("binding_table",binding_texture)
-	else:binding_texture.update(binding)
+		binding_texture=ImageTexture.create_from_image(gpu_table(binding));set_param("binding_table",binding_texture)
+	else:binding_texture.update(gpu_table(binding))
 	if chart_texture==null:
-		chart_texture=ImageTexture.create_from_image(chart);set_param("chart_table",chart_texture)
+		chart_texture=ImageTexture.create_from_image(gpu_table(chart));set_param("chart_table",chart_texture)
 	memory_bytes=body_images.size()*2048*2048*4+face_images.size()*512*512*4+maxi(motion_images.size(),page_bytes.size())*256*256*motion_texel_bytes()+binding.get_data_size()+shape_edges.get_data_size()+chart.get_data_size()+view_image.get_data_size()+16384
 	dirty=false
 	# Raw legacy atlases are reloadable preparation data, not runtime dependencies.
@@ -560,8 +569,8 @@ func free_texels() -> int:
 	return n
 
 func update_binding() -> void:
-	if binding_texture!=null:binding_texture.update(binding)
-	if shape_texture!=null:shape_texture.update(shape_edges)
+	if binding_texture!=null:binding_texture.update(gpu_table(binding))
+	if shape_texture!=null:shape_texture.update(gpu_table(shape_edges))
 	dirty=false
 
 func validate_capacity() -> String:
@@ -824,5 +833,5 @@ func apply_face_track(row:int,track_id:int,phase:float)->void:
 		face_overrides[row]=base;set_state(row,4,Vector4(base,1,0,0))
 
 func upload_state() -> void:
-	state_texture.update(Image.create_from_data(8,Catalog.CAPACITY,false,Image.FORMAT_RGBAF,state_data.to_byte_array()))
+	state_texture.update(gpu_bytes(8,Catalog.CAPACITY,state_data.to_byte_array()))
 	uploads+=1

@@ -11,6 +11,18 @@ uniform sampler2D chart_table : filter_nearest, repeat_disable;
 uniform sampler2DArray motion_pages : filter_nearest, repeat_disable;
 uniform sampler2DArray body_pages : filter_linear, repeat_disable;
 uniform sampler2DArray face_pages : filter_linear, repeat_disable;
+
+// 表（actor_state・binding_table・shape_edges・view_table・chart_table）は 32bit 浮動小数を 8bit×4 の画素にビット列のまま詰めて渡す。
+// iPhone など 32bit 浮動小数のテクスチャを使えない端末では Godot が 16bit に落とし、番号（動作の位置・絵の番号）が狂って何も描けなかったため。
+// 1つの vec4 は横に並んだ4画素。resource_store.gd の gpu_table が詰める。
+float unpack32(vec4 b){
+	uvec4 u=uvec4(b*255.0+0.5);
+	return uintBitsToFloat(u.x|(u.y<<8u)|(u.z<<16u)|(u.w<<24u));
+}
+vec4 fetch32(sampler2D s,ivec2 p){
+	int x=p.x*4;
+	return vec4(unpack32(texelFetch(s,ivec2(x,p.y),0)),unpack32(texelFetch(s,ivec2(x+1,p.y),0)),unpack32(texelFetch(s,ivec2(x+2,p.y),0)),unpack32(texelFetch(s,ivec2(x+3,p.y),0)));
+}
 varying flat int image_layer;
 varying flat int is_face;
 // 胸の領域の確認用の色付け（束縛表 soft の debug が 0 より大きいとき）。
@@ -27,16 +39,16 @@ vec4 blend_quat(vec4 a, vec4 b, float t) {
 vec3 rotate_q(vec4 q, vec3 p) { return p + 2.0*cross(q.xyz,cross(q.xyz,p)+q.w*p); }
 vec4 multiply_q(vec4 a, vec4 b) { return vec4(a.w*b.xyz+b.w*a.xyz+cross(a.xyz,b.xyz),a.w*b.w-dot(a.xyz,b.xyz)); }
 vec3 anchor_world(int slot) {
-	vec4 s=texelFetch(actor_state,ivec2(0,actor_row),0);
+	vec4 s=fetch32(actor_state,ivec2(0,actor_row));
 	vec3 p=mix(frame_field(int(s.x),int(s.w),3,slot).xyz,frame_field(int(s.y),int(s.w),3,slot).xyz,s.z);
-	vec4 timing=texelFetch(actor_state,ivec2(2,actor_row),0);
+	vec4 timing=fetch32(actor_state,ivec2(2,actor_row));
 	if(timing.x>0.0){
-		vec4 n=texelFetch(actor_state,ivec2(1,actor_row),0);
+		vec4 n=fetch32(actor_state,ivec2(1,actor_row));
 		p=mix(p,mix(frame_field(int(n.x),int(n.w),3,slot).xyz,frame_field(int(n.y),int(n.w),3,slot).xyz,n.z),timing.x);
 	}
-	if(texelFetch(actor_state,ivec2(3,actor_row),0).w>0.5){
-		vec4 place=texelFetch(actor_state,ivec2(7,actor_row),0);
-		p=rotate_q(texelFetch(actor_state,ivec2(6,actor_row),0),p*place.w)+place.xyz;
+	if(fetch32(actor_state,ivec2(3,actor_row)).w>0.5){
+		vec4 place=fetch32(actor_state,ivec2(7,actor_row));
+		p=rotate_q(fetch32(actor_state,ivec2(6,actor_row)),p*place.w)+place.xyz;
 	}
 	return p;
 }
@@ -59,48 +71,48 @@ void projected_surface(vec4 q,vec3 radii,vec3 right,vec3 up,out vec2 ex,out vec2
 }
 vec4 collar_frame(int row,vec3 view,vec3 right,vec3 up){
 	// The target is the actual rendered collar, not the old skeleton's neck height.
-	vec4 t=texelFetch(actor_state,ivec2(0,actor_row),0),timing=texelFetch(actor_state,ivec2(2,actor_row),0);
+	vec4 t=fetch32(actor_state,ivec2(0,actor_row)),timing=fetch32(actor_state,ivec2(2,actor_row));
 	vec3 c=mix(frame_field(int(t.x),int(t.w),0,2).xyz,frame_field(int(t.y),int(t.w),0,2).xyz,t.z);
 	vec4 q=blend_quat(frame_field(int(t.x),int(t.w),1,2),frame_field(int(t.y),int(t.w),1,2),t.z);
 	vec3 dims=mix(frame_field(int(t.x),int(t.w),2,2).xyz,frame_field(int(t.y),int(t.w),2,2).xyz,t.z);
 	if(timing.x>0.0){
-		vec4 n=texelFetch(actor_state,ivec2(1,actor_row),0);
+		vec4 n=fetch32(actor_state,ivec2(1,actor_row));
 		c=mix(c,mix(frame_field(int(n.x),int(n.w),0,2).xyz,frame_field(int(n.y),int(n.w),0,2).xyz,n.z),timing.x);
 		q=blend_quat(q,blend_quat(frame_field(int(n.x),int(n.w),1,2),frame_field(int(n.y),int(n.w),1,2),n.z),timing.x);
 		dims=mix(dims,mix(frame_field(int(n.x),int(n.w),2,2).xyz,frame_field(int(n.y),int(n.w),2,2).xyz,n.z),timing.x);
 	}
-	vec4 binding0=texelFetch(binding_table,ivec2(8,row),0),binding1=texelFetch(binding_table,ivec2(9,row),0);
+	vec4 binding0=fetch32(binding_table,ivec2(8,row)),binding1=fetch32(binding_table,ivec2(9,row));
 	vec3 radii=binding0.xyz*(binding0.w>0.5?dims:vec3(1));
 	c+=binding1.w>0.5?rotate_q(q,binding1.xyz):binding1.xyz;
-	if(texelFetch(actor_state,ivec2(3,actor_row),0).w>0.5){
-		vec4 member=texelFetch(actor_state,ivec2(6,actor_row),0),place=texelFetch(actor_state,ivec2(7,actor_row),0);
+	if(fetch32(actor_state,ivec2(3,actor_row)).w>0.5){
+		vec4 member=fetch32(actor_state,ivec2(6,actor_row)),place=fetch32(actor_state,ivec2(7,actor_row));
 		c=rotate_q(member,c*place.w)+place.xyz;radii*=place.w;q=multiply_q(member,q);
 	}
 	vec3 local_view=vec3(dot(view,rotate_q(q,vec3(1,0,0))),dot(view,rotate_q(q,vec3(0,1,0))),dot(view,rotate_q(q,vec3(0,0,1))));
 	int d=int(floor(mod(atan(local_view.x,local_view.z)+6.28318530718,6.28318530718)/0.78539816339+0.5))%8;
-	vec2 uv=texelFetch(binding_table,ivec2(96+d,row),0).zw;
+	vec2 uv=fetch32(binding_table,ivec2(96+d,row)).zw;
 	vec2 ex,ey;vec3 size;projected_surface(q,radii,right,up,ex,ey,size);
-	float scale=texelFetch(actor_state,ivec2(3,actor_row),0).w>0.5?texelFetch(actor_state,ivec2(7,actor_row),0).w:1.0;
+	float scale=fetch32(actor_state,ivec2(3,actor_row)).w>0.5?fetch32(actor_state,ivec2(7,actor_row)).w:1.0;
 	return vec4(screen_point(c,right,up)+surface_point(uv,ex,ey,size.x,size.y,size.z),screen_point(rotate_q(q,vec3(0,1,0))*scale,right,up));
 }
 // Rendered waist target includes artwork registration, body proportions and pair placement.
 vec2 waist_point(int row,vec2 uv,vec3 right,vec3 up,out vec3 waist_up){
 	// The target is the actual rendered collar, not the old skeleton's neck height.
-	vec4 t=texelFetch(actor_state,ivec2(0,actor_row),0),timing=texelFetch(actor_state,ivec2(2,actor_row),0);
+	vec4 t=fetch32(actor_state,ivec2(0,actor_row)),timing=fetch32(actor_state,ivec2(2,actor_row));
 	vec3 c=mix(frame_field(int(t.x),int(t.w),0,1).xyz,frame_field(int(t.y),int(t.w),0,1).xyz,t.z);
 	vec4 q=blend_quat(frame_field(int(t.x),int(t.w),1,1),frame_field(int(t.y),int(t.w),1,1),t.z);
 	vec3 dims=mix(frame_field(int(t.x),int(t.w),2,1).xyz,frame_field(int(t.y),int(t.w),2,1).xyz,t.z);
 	if(timing.x>0.0){
-		vec4 n=texelFetch(actor_state,ivec2(1,actor_row),0);
+		vec4 n=fetch32(actor_state,ivec2(1,actor_row));
 		c=mix(c,mix(frame_field(int(n.x),int(n.w),0,1).xyz,frame_field(int(n.y),int(n.w),0,1).xyz,n.z),timing.x);
 		q=blend_quat(q,blend_quat(frame_field(int(n.x),int(n.w),1,1),frame_field(int(n.y),int(n.w),1,1),n.z),timing.x);
 		dims=mix(dims,mix(frame_field(int(n.x),int(n.w),2,1).xyz,frame_field(int(n.y),int(n.w),2,1).xyz,n.z),timing.x);
 	}
-	vec4 binding0=texelFetch(binding_table,ivec2(4,row),0),binding1=texelFetch(binding_table,ivec2(5,row),0);
+	vec4 binding0=fetch32(binding_table,ivec2(4,row)),binding1=fetch32(binding_table,ivec2(5,row));
 	vec3 radii=binding0.xyz*(binding0.w>0.5?dims:vec3(1));
 	c+=binding1.w>0.5?rotate_q(q,binding1.xyz):binding1.xyz;
-	if(texelFetch(actor_state,ivec2(3,actor_row),0).w>0.5){
-		vec4 member=texelFetch(actor_state,ivec2(6,actor_row),0),place=texelFetch(actor_state,ivec2(7,actor_row),0);
+	if(fetch32(actor_state,ivec2(3,actor_row)).w>0.5){
+		vec4 member=fetch32(actor_state,ivec2(6,actor_row)),place=fetch32(actor_state,ivec2(7,actor_row));
 		c=rotate_q(member,c*place.w)+place.xyz;radii*=place.w;q=multiply_q(member,q);
 	}
 	vec2 ex,ey;vec3 size;projected_surface(q,radii,right,up,ex,ey,size);
@@ -113,9 +125,9 @@ vec2 waist_point(int row,vec2 uv,vec3 right,vec3 up,out vec3 waist_up){
 // grow は大きさの倍率（束縛表149列。1が標準）。領域の上寄りの点を中心に網目を広げる（付け根側は動かさず、下と外へ膨らむ）。
 vec2 soft_region(inout vec2 rest,inout float dbg,int column,int lag_l,int lag_r,int d,int row,int a,int b,int layer,float t,vec4 q,vec3 right,vec3 up,float actor_scale,float grow){
 	vec2 shift=vec2(0.0);
-	vec4 tuning=texelFetch(binding_table,ivec2(column+16,row),0);
+	vec4 tuning=fetch32(binding_table,ivec2(column+16,row));
 	for(int k=0;k<2;k++){
-		vec4 region=texelFetch(binding_table,ivec2(column+d*2+k,row),0);
+		vec4 region=fetch32(binding_table,ivec2(column+d*2+k,row));
 		if(region.z<=0.0)continue;
 		int ss=k==0?lag_l:lag_r;
 		vec3 lag=mix(vec3(frame_field(a,layer,0,ss).w,frame_field(a,layer,2,ss).w,frame_field(a,layer,3,ss).w),vec3(frame_field(b,layer,0,ss).w,frame_field(b,layer,2,ss).w,frame_field(b,layer,3,ss).w),t)*tuning.y;
@@ -142,24 +154,24 @@ vec2 soft_region(inout vec2 rest,inout float dbg,int column,int lag_l,int lag_r,
 }
 void vertex() {
 	int slot = int(CUSTOM0.x);
-	vec4 state0 = texelFetch(actor_state,ivec2(0,actor_row),0);
-	vec4 state2 = texelFetch(actor_state,ivec2(2,actor_row),0);
-	vec4 state3 = texelFetch(actor_state,ivec2(3,actor_row),0);
+	vec4 state0 = fetch32(actor_state,ivec2(0,actor_row));
+	vec4 state2 = fetch32(actor_state,ivec2(2,actor_row));
+	vec4 state3 = fetch32(actor_state,ivec2(3,actor_row));
 	int binding_row = int(state3.x);
 	// 付属物（枠23〜27）は束縛表の160列から。耳（25）は頭（4）の半径・位置・首の補正を使い、向きの表と広がりだけ自分の列。
 	int bslot=slot==25?4:slot;
-	vec4 binding0 = texelFetch(binding_table,ivec2(binding_column(bslot),binding_row),0);
-	vec4 binding1 = texelFetch(binding_table,ivec2(binding_column(bslot)+1,binding_row),0);
-	vec4 binding2 = texelFetch(binding_table,ivec2(binding_column(bslot)+2,binding_row),0);
-	vec4 binding3 = texelFetch(binding_table,ivec2(binding_column(bslot)+3,binding_row),0);
+	vec4 binding0 = fetch32(binding_table,ivec2(binding_column(bslot),binding_row));
+	vec4 binding1 = fetch32(binding_table,ivec2(binding_column(bslot)+1,binding_row));
+	vec4 binding2 = fetch32(binding_table,ivec2(binding_column(bslot)+2,binding_row));
+	vec4 binding3 = fetch32(binding_table,ivec2(binding_column(bslot)+3,binding_row));
 	vec4 prop0=vec4(0.0),prop2=vec4(0.0),prop3=vec4(0.0);
 	bool prop_hidden=false;
 	if(slot>=23){
-		prop0=texelFetch(binding_table,ivec2(binding_column(slot),binding_row),0);
-		prop2=texelFetch(binding_table,ivec2(binding_column(slot)+2,binding_row),0);
-		prop3=texelFetch(binding_table,ivec2(binding_column(slot)+3,binding_row),0);
+		prop0=fetch32(binding_table,ivec2(binding_column(slot),binding_row));
+		prop2=fetch32(binding_table,ivec2(binding_column(slot)+2,binding_row));
+		prop3=fetch32(binding_table,ivec2(binding_column(slot)+3,binding_row));
 		// 役者の状態の5列目：x=見せる枠の印（ビット0が枠23）、y=男性器の状態（0通常 1勃起）。
-		int mask=int(texelFetch(actor_state,ivec2(5,actor_row),0).x+0.5);
+		int mask=int(fetch32(actor_state,ivec2(5,actor_row)).x+0.5);
 		prop_hidden=prop0.x<=0.0 || ((mask>>(slot-23))&1)==0;
 	}
 	int a=int(state0.x); int b=int(state0.y); int layer=int(state0.w);
@@ -167,7 +179,7 @@ void vertex() {
 	vec4 q=blend_quat(frame_field(a,layer,1,slot),frame_field(b,layer,1,slot),state0.z);
 	vec3 dims=mix(frame_field(a,layer,2,slot).xyz,frame_field(b,layer,2,slot).xyz,state0.z);
 	if (state2.x > 0.0) {
-		vec4 n=texelFetch(actor_state,ivec2(1,actor_row),0);
+		vec4 n=fetch32(actor_state,ivec2(1,actor_row));
 		int na=int(n.x);int nb=int(n.y);int nl=int(n.w);
 		center=mix(center,mix(frame_field(na,nl,0,slot).xyz,frame_field(nb,nl,0,slot).xyz,n.z),state2.x);
 		q=blend_quat(q,blend_quat(frame_field(na,nl,1,slot),frame_field(nb,nl,1,slot),n.z),state2.x);
@@ -176,13 +188,13 @@ void vertex() {
 	vec3 radii=binding0.xyz * (binding0.w > 0.5 ? dims : vec3(1.0));
 	// 男性器を場面の外で勃起させて見せるとき：付け根を軸に腰の前へ起こす（状態の5列目 z、ラジアン）。場面の中は焼いた向きのまま（z=0）。
 	if(slot==27){
-		float lift=texelFetch(actor_state,ivec2(5,actor_row),0).z;
+		float lift=fetch32(actor_state,ivec2(5,actor_row)).z;
 		if(abs(lift)>0.001)q=multiply_q(q,vec4(sin(lift*0.5),0.0,0.0,cos(lift*0.5)));
 	}
 	center += binding1.w > 0.5 ? rotate_q(q,binding1.xyz) : binding1.xyz;
 	if (state3.w > 0.5) {
-		vec4 member=texelFetch(actor_state,ivec2(6,actor_row),0);
-		vec4 place=texelFetch(actor_state,ivec2(7,actor_row),0);
+		vec4 member=fetch32(actor_state,ivec2(6,actor_row));
+		vec4 place=fetch32(actor_state,ivec2(7,actor_row));
 		center=rotate_q(member,center*place.w)+place.xyz;
 		radii*=place.w;
 		q=multiply_q(member,q);
@@ -199,7 +211,7 @@ void vertex() {
 	is_face=slot==4 ? 1 : 0;
 	if ((is_face==1 || slot==25) && elevation>62.5) v=8;
 	vec2 local_uv=UV;
-	if (is_face==1) local_uv=texelFetch(chart_table,ivec2(int(CUSTOM0.y),int(binding2.y)+v),0).xy;
+	if (is_face==1) local_uv=fetch32(chart_table,ivec2(int(CUSTOM0.y),int(binding2.y)+v)).xy;
 	vec2 rest=local_uv;
 	// 耳：頭の図集の枠を上へ広げた範囲に描いた絵。形の位置は頭の枠の座標へ写す。
 	if(slot==25)rest.y=-prop3.z+rest.y*(1.0+prop3.z);
@@ -209,7 +221,7 @@ void vertex() {
 	if(slot==26 && prop3.x>0.0)rest.x+=prop3.x*sin(TIME*6.28318530718*prop3.y+float(actor_row)*1.7)*rest.y*rest.y;
 	// Optional waist taper, confined to the joining ends of existing parts.
 	// White is the exact legacy path; no motion texture layout changes.
-	vec4 edges=texelFetch(shape_edges,ivec2(slot,binding_row),0);
+	vec4 edges=fetch32(shape_edges,ivec2(slot,binding_row));
 	float top_weight=1.0-smoothstep(0.0,0.36,rest.y);
 	float bottom_weight=smoothstep(0.64,1.0,rest.y);
 	radii.x*=1.0+(edges.x-1.0)*top_weight+(edges.z-1.0)*bottom_weight;
@@ -220,32 +232,32 @@ void vertex() {
 	}
 	if(slot==0||slot==21||slot==22){
 		// 骨盤画像の下への延長（向きごと）。上端はそのままで、伸ばした分だけ中心を下げる。
-		float extension=texelFetch(binding_table,ivec2(141+d,binding_row),0).x;
+		float extension=fetch32(binding_table,ivec2(141+d,binding_row)).x;
 		if(extension>0.0){center-=by*radii.y*extension;radii.y*=1.0+extension;}
 	}
 	vec2 ex,ey;vec3 size;projected_surface(q,radii,right,up,ex,ey,size);
 	float l00=size.x,l10=size.y,l11=size.z;
 	vec3 wx=right*ex.x-up*ex.y;
 	vec2 soft_shift=vec2(0.0);soft_debug=0.0;
-	float soft_scale=state3.w>0.5?texelFetch(actor_state,ivec2(7,actor_row),0).w:1.0;
+	float soft_scale=state3.w>0.5?fetch32(actor_state,ivec2(7,actor_row)).w:1.0;
 	// 胸は胸の画像、尻は骨盤の画像（上部・下部左右の3スロットで同じ式を使うので継ぎ目は開かない）。
-	vec4 soft_size=texelFetch(binding_table,ivec2(149,binding_row),0);
+	vec4 soft_size=fetch32(binding_table,ivec2(149,binding_row));
 	if(slot==2)soft_shift=soft_region(rest,soft_debug,106,2,1,d,binding_row,a,b,layer,state0.z,q,right,up,soft_scale,soft_size.x>0.0?soft_size.x:1.0);
 	if(slot==0||slot==21||slot==22)soft_shift=soft_region(rest,soft_debug,124,21,22,d,binding_row,a,b,layer,state0.z,q,right,up,soft_scale,soft_size.y>0.0?soft_size.y:1.0);
 	vec2 p=(rest-0.5)*2.0;
 	vec2 base=screen_point(center,right,up);
 	vec2 point=base+ex*(l00*p.x)+ey*(l10*p.x+l11*p.y)+soft_shift;
 	if((is_face==1 || slot==25) && binding2.z>0.5){
-		vec2 socket=texelFetch(binding_table,ivec2(96+v,binding_row),0).xy;
+		vec2 socket=fetch32(binding_table,ivec2(96+v,binding_row)).xy;
 		float tilt=clamp(elevation-binding3.y,0.0,binding3.w);
 		socket.y+=(1.0-socket.y)*sin(radians(tilt))*binding3.z*smoothstep(0.27,0.55,socket.y);
 		vec4 collar=collar_frame(binding_row,view,right,up);
-		float neck_length=texelFetch(binding_table,ivec2(105,binding_row),0).r;
+		float neck_length=fetch32(binding_table,ivec2(105,binding_row)).r;
 		point+=collar.xy+collar.zw*neck_length-base-surface_point(socket,ex,ey,l00,l10,l11);
 	}
-	if(slot==3 && texelFetch(binding_table,ivec2(18,binding_row),0).z>0.5){
+	if(slot==3 && fetch32(binding_table,ivec2(18,binding_row)).z>0.5){
 		vec4 collar=collar_frame(binding_row,view,right,up);
-		float neck_length=texelFetch(binding_table,ivec2(105,binding_row),0).r;
+		float neck_length=fetch32(binding_table,ivec2(105,binding_row)).r;
 		vec2 axis=collar.zw;
 		vec2 across=length(axis)>0.001?normalize(vec2(-axis.y,axis.x)):vec2(1,0);
 		// Neck belongs to the body. Its top is hidden under the jaw, its bottom under the collar.
@@ -274,7 +286,7 @@ void vertex() {
 		// World UP is incorrect when the pelvis tilts; rear vertices need the same join.
 		float join_weight=clamp(binding3.z/0.06,0.0,1.0)*0.85;
 		float forward_bend=smoothstep(0.025,0.12,1.0-dot(by,vec3(0,1,0)));
-		float actor_scale=state3.w>0.5?texelFetch(actor_state,ivec2(7,actor_row),0).w:1.0;
+		float actor_scale=state3.w>0.5?fetch32(actor_state,ivec2(7,actor_row)).w:1.0;
 		vec3 upright=(leg_dir+vec3(0,1,0))*max(dot(wx,bz)*p.x,0.0)*lower*binding3.z*actor_scale;
 		vec3 folded=(leg_dir+by)*lower*radii.y*join_weight;
 		vec3 correction=mix(upright,folded,forward_bend);
@@ -295,14 +307,14 @@ void vertex() {
 	int vr=int(binding2.x)+v;
 	if(slot>=23){
 		vr=int(prop2.x)+v;
-		if(slot==27 && prop2.y>1.5 && texelFetch(actor_state,ivec2(5,actor_row),0).y>0.5)vr+=9;
+		if(slot==27 && prop2.y>1.5 && fetch32(actor_state,ivec2(5,actor_row)).y>0.5)vr+=9;
 	}
 	if(is_face==1){
-		vec4 face_state=texelFetch(actor_state,ivec2(4,actor_row),0);
+		vec4 face_state=fetch32(actor_state,ivec2(4,actor_row));
 		if(face_state.y>0.5)vr=int(face_state.x)+v;
 	}
-	vec4 rect=texelFetch(view_table,ivec2(0,vr),0);
-	vec4 info=texelFetch(view_table,ivec2(1,vr),0);
+	vec4 rect=fetch32(view_table,ivec2(0,vr));
+	vec4 info=fetch32(view_table,ivec2(1,vr));
 	if(info.y>0.5) local_uv.x=1.0-local_uv.x;
 	UV=rect.xy+local_uv*rect.zw;
 	image_layer=int(info.x);
