@@ -1,0 +1,103 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "牛舎。四つん這いで首を板（blocks）の穴に挟まれ、胸の下に搾乳機の吸い口（effects の milker）を付けられる。機械が脈打つたびに体がびくりと揺れる。乳は床の缶（milk_tank）へ。",
+	"version": 1,
+	"duration": 1.2,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 1.2,
+			"base": "all_fours",
+			"poses": {
+				"a": {"hip": [0, 1.0, 0], "lean": 90, "head_pitch": -40},
+				"b": {"hip": [0, 0.98, -0.04], "lean": 90, "head_pitch": -30}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "topless",
+			"secondary": {
+				"chest": {"lag": 0.1, "damping": 0.55, "amount": 1, "max_offset": 0.04}
+			}
+		}
+	],
+	"constraints": [],
+	"blocks": [
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [0, 0.32, 0.56],
+			"yaw": 0,
+			"size": [0.1, 1.1, 0.32],
+			"color": "#8a6a44",
+			"depth_bias": 0.0
+		},
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [0.52, 0, 0.56],
+			"yaw": 0,
+			"size": [0.08, 0.08, 1.0],
+			"color": "#5a3e26",
+			"depth_bias": 0.0
+		},
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [-0.52, 0, 0.56],
+			"yaw": 0,
+			"size": [0.08, 0.08, 1.0],
+			"color": "#5a3e26",
+			"depth_bias": 0.0
+		}
+	],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "root",
+			"image": "milk_tank",
+			"offset": [-0.55, 0.34, 0.45],
+			"scale": 0.6
+		},
+		{
+			"actor": "taker",
+			"part": "root",
+			"image": "milker",
+			"offset": [0, 0.2, 0.34],
+			"scale_keys": [{"t": 0, "scale": 0.5}, {"t": 0.5, "scale": 0.47}, {"t": 1, "scale": 0.5}]
+		}
+	]
+}

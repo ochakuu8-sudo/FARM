@@ -1,0 +1,71 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "両手を後頭部で組んだ蹲踞。1体だけの場面。爪先立ちでしゃがみ、膝を大きく左右に開き、両手を頭の後ろにそろえて晒す。姿勢を保とうとして腿が震え、腰がわずかに上下し、胸が揺れる。斜め45°で正面に見える向き（yaw 45）。",
+	"version": 1,
+	"duration": 2.0,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"hold": {
+			"duration": 2.0,
+			"base": "squat",
+			"poses": {
+				"low": {
+					"hip": [0, 1.08, -0.12],
+					"lean": 4,
+					"head_pitch": 4,
+					"foot_l": [0.5, 0.34, 0.08],
+					"foot_r": [-0.5, 0.34, 0.08],
+					"pole_leg_l": [1, 0, 0.45],
+					"pole_leg_r": [-1, 0, 0.45],
+					"hand_l": [0.1, 2.7, -0.34],
+					"hand_r": [-0.1, 2.7, -0.34],
+					"pole_arm_l": [1, 0.1, 0.5],
+					"pole_arm_r": [-1, 0.1, 0.5],
+					"hand_dir_l": [0, 0, 1],
+					"hand_dir_r": [0, 0, 1]
+				},
+				"high": {
+					"hip": [0, 1.16, -0.1],
+					"lean": 0,
+					"head_pitch": -6,
+					"foot_l": [0.5, 0.34, 0.08],
+					"foot_r": [-0.5, 0.34, 0.08],
+					"pole_leg_l": [1, 0, 0.45],
+					"pole_leg_r": [-1, 0, 0.45],
+					"hand_l": [0.1, 2.77, -0.34],
+					"hand_r": [-0.1, 2.77, -0.34],
+					"pole_arm_l": [1, 0.1, 0.5],
+					"pole_arm_r": [-1, 0.1, 0.5],
+					"hand_dir_l": [0, 0, 1],
+					"hand_dir_r": [0, 0, 1]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "low", "ease": "soft"},
+				{"t": 0.5, "pose": "high", "ease": "soft"},
+				{"t": 1, "pose": "low"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 45,
+			"clip": "hold",
+			"outfit": "nude",
+			"secondary": {
+				"chest": {"lag": 0.12, "damping": 0.55, "amount": 1, "max_offset": 0.04},
+				"pelvis": {"lag": 0.08, "damping": 0.6, "amount": 0.6, "max_offset": 0.02}
+			},
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "neutral"}},
+				{"t": 0.45, "face": {"preset": "blink"}},
+				{"t": 0.52, "face": {"preset": "neutral"}}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": []
+}

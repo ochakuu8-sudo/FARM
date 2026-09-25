@@ -1,0 +1,15 @@
+{
+	"failures": [],
+	"max_contact": 0.00000989917498372961,
+	"samples": 52,
+	"secondary": {
+		"0": {
+			"periodic_residual": 0.00000156901546688459,
+			"samples": 241
+		},
+		"1": {
+			"periodic_residual": 0.00000121517450679676,
+			"samples": 241
+		}
+	}
+}

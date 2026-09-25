@@ -1,0 +1,223 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "背後から胸を揉む。restrain_grope を元に、ゴブリンの手の接点を offset_keys で円く動かす（左右で半周ずらす）。",
+	"version": 1,
+	"duration": 1.6,
+	"clips": {
+		"bound_struggle": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0.05, 2.0, 0.02],
+					"lean": -2,
+					"twist": -12,
+					"head_yaw": 20,
+					"head_pitch": 4,
+					"hand_l": [0.42, 3.86, -0.2],
+					"hand_r": [-0.42, 3.86, -0.2],
+					"pole_arm_l": [1, 0.2, -0.4],
+					"pole_arm_r": [-1, 0.2, -0.4],
+					"wrist_l": [0, 0, -10],
+					"wrist_r": [0, 0, 10]
+				},
+				"b": {
+					"hip": [-0.05, 1.97, 0.06],
+					"lean": -14,
+					"twist": 12,
+					"head_yaw": -18,
+					"head_pitch": 16,
+					"hand_l": [0.38, 3.84, -0.24],
+					"hand_r": [-0.46, 3.82, -0.18],
+					"pole_arm_l": [1, 0.2, -0.4],
+					"pole_arm_r": [-1, 0.2, -0.4],
+					"wrist_l": [0, 0, -10],
+					"wrist_r": [0, 0, 10]
+				}
+			},
+			"keys": [{"t": 0, "pose": "a"}, {"t": 0.5, "pose": "b"}, {"t": 1, "pose": "a"}]
+		},
+		"grope_from_behind": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"p": {
+					"hip": [0, 1.76, 0.04],
+					"lean": 6,
+					"hand_l": [0.4, 2.5, 0.5],
+					"hand_r": [-0.4, 2.5, 0.5],
+					"hand_dir_l": [0, 0.3, 1],
+					"hand_dir_r": [0, 0.3, 1],
+					"pole_arm_l": [1, -0.3, -0.6],
+					"pole_arm_r": [-1, -0.3, -0.6],
+					"head_pitch": -10,
+					"head_yaw": -10
+				},
+				"q": {
+					"hip": [0, 1.7, 0.1],
+					"lean": 12,
+					"hand_l": [0.4, 2.5, 0.5],
+					"hand_r": [-0.4, 2.5, 0.5],
+					"hand_dir_l": [0.3, -0.2, 1],
+					"hand_dir_r": [-0.3, -0.2, 1],
+					"pole_arm_l": [1, -0.3, -0.6],
+					"pole_arm_r": [-1, -0.3, -0.6],
+					"head_pitch": -14,
+					"head_yaw": -18
+				}
+			},
+			"keys": [{"t": 0, "pose": "p"}, {"t": 0.5, "pose": "q"}, {"t": 1, "pose": "p"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "bound_struggle",
+			"secondary": {
+				"chest": {"lag": 0.1, "damping": 0.6, "amount": 1, "max_offset": 0.04}
+			},
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.4,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.7,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"press": {"from": "goblin", "radius": 0.14, "strength": 1.0, "max": 0.05}
+		},
+		{"id": "goblin", "character": 1, "root": [-0.38, 0, -0.15], "yaw": 90, "clip": "grope_from_behind"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_l",
+					"follower_socket": "part:hand_l",
+					"offset_space": "leader_local",
+					"offset_keys": [
+						{"t": 0.0, "offset": [0.13, 0.08, 0.17]},
+						{"t": 0.25, "offset": [0.1, 0.11, 0.17]},
+						{"t": 0.5, "offset": [0.07, 0.08, 0.17]},
+						{"t": 0.75, "offset": [0.1, 0.05, 0.17]},
+						{"t": 1.0, "offset": [0.13, 0.08, 0.17]}
+					]
+				},
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_space": "leader_local",
+					"offset_keys": [
+						{"t": 0.0, "offset": [-0.13, 0.08, 0.17]},
+						{"t": 0.25, "offset": [-0.1, 0.05, 0.17]},
+						{"t": 0.5, "offset": [-0.07, 0.08, 0.17]},
+						{"t": 0.75, "offset": [-0.1, 0.11, 0.17]},
+						{"t": 1.0, "offset": [-0.13, 0.08, 0.17]}
+					]
+				},
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "elbow_l",
+					"offset": [0.32, -0.12, -0.08],
+					"offset_space": "leader_local",
+					"tolerance": 0.3
+				},
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "elbow_r",
+					"offset": [-0.32, -0.12, -0.08],
+					"offset_space": "leader_local",
+					"tolerance": 0.3
+				}
+			]
+		}
+	],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "blush",
+			"offset": [0, -0.2, 0.1],
+			"from": 0.0,
+			"to": 1.0,
+			"scale": 0.7,
+			"facing": "front"
+		},
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "sweat",
+			"offset": [-0.1, 0.16, 0.0],
+			"from": 0.1,
+			"to": 0.6,
+			"fade": 0.08,
+			"scale": 0.8,
+			"rise": -10
+		},
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "heart",
+			"offset": [0.25, 0.3, 0.1],
+			"from": 0.4,
+			"to": 0.95,
+			"fade": 0.1,
+			"scale": 0.8,
+			"pulse": 0.15,
+			"rise": 16
+		},
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "breath",
+			"offset": [0, -0.28, 0.32],
+			"from": 0.55,
+			"to": 0.85,
+			"fade": 0.1,
+			"scale": 0.8,
+			"rise": 6,
+			"facing": "front"
+		}
+	],
+	"stages": {
+		"strong": {
+			"clips": {
+				"bound_struggle": {
+					"poses": {
+						"b": {"lean": -18, "twist": 16, "head_pitch": 22, "hip": [-0.07, 1.95, 0.08]}
+					}
+				}
+			}
+		}
+	},
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": [{"before": "goblin.head", "after": "taker.head", "start": 0, "end": 1}],
+	"check": {
+		"measure": "goblin.wrist_l:taker.part:chest",
+		"phases": [0, 0.25, 0.5, 0.75],
+		"view": 0,
+		"fit": {
+			"params": [
+				{"path": "actors.1.root", "axes": [0, 2], "step": 0.02, "range": 0.15},
+				{"path": "clips.grope_from_behind.poses.p.hip", "axes": [1, 2], "step": 0.05, "range": 0.3},
+				{"path": "clips.grope_from_behind.poses.q.hip", "axes": [1, 2], "step": 0.05, "range": 0.3}
+			],
+			"goals": [],
+			"phases": [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875],
+			"iterations": 10
+		}
+	}
+}

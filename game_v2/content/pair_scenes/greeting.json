@@ -1,0 +1,20 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"version": 1,
+	"duration": 4,
+	"actors": [
+		{"id": "leader", "character": 0, "root": [-0.36, 0, 0], "yaw": 0, "clip": "idle"},
+		{"id": "follower", "character": 1, "root": [0.34, 0, -0.04], "yaw": 0, "clip": "wave"}
+	],
+	"constraints": [
+		{
+			"leader": "leader",
+			"follower": "follower",
+			"bindings": [{"leader_socket": "joint:wrist_l", "follower_goal": "hand_r", "follower_socket": "joint:wrist_r"}]
+		}
+	],
+	"stages": {
+		"brisk": {"duration": 2}
+	},
+	"transition_markers": {"cycle_start": 0}
+}

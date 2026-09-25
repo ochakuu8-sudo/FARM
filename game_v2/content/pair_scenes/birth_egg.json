@@ -1,0 +1,325 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "出産（卵を産む）。1体だけの場面。正面向きで膝を大きく開いてしゃがみ、いきむ（default を繰り返す）→ 腰を前へ突き出して大きな卵を前方へ産み出す（lay、1回）→ 余韻（after、止める）。卵は効果の層（character_assets/effects/egg.png）。産み出す間は腰に付け、飛び出してからは足もと（root）の world 座標で前へ飛んで床で弾んで止まる。",
+	"version": 1,
+	"duration": 2.0,
+	"check": {"phases": [0, 0.5], "view": 0},
+	"clips": {
+		"labor": {
+			"duration": 2.0,
+			"base": "squat",
+			"poses": {
+				"breathe": {
+					"hip": [0, 0.9, -0.12],
+					"lean": 6,
+					"head_pitch": -8,
+					"spine_pitch": 0,
+					"foot_l": [0.62, 0.2, 0.1],
+					"foot_r": [-0.62, 0.2, 0.1],
+					"pole_leg_l": [1, 0.35, 0.5],
+					"pole_leg_r": [-1, 0.35, 0.5],
+					"hand_l": [0.85, 0.72, 0.17],
+					"hand_r": [-0.85, 0.72, 0.17],
+					"pole_arm_l": [1, 0.2, -0.6],
+					"pole_arm_r": [-1, 0.2, -0.6]
+				},
+				"push": {
+					"hip": [0, 0.82, -0.14],
+					"lean": 10,
+					"head_pitch": 6,
+					"spine_pitch": 5,
+					"foot_l": [0.62, 0.2, 0.1],
+					"foot_r": [-0.62, 0.2, 0.1],
+					"pole_leg_l": [1, 0.35, 0.5],
+					"pole_leg_r": [-1, 0.35, 0.5],
+					"hand_l": [0.85, 0.72, 0.17],
+					"hand_r": [-0.85, 0.72, 0.17],
+					"pole_arm_l": [1, 0.2, -0.6],
+					"pole_arm_r": [-1, 0.2, -0.6]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "breathe", "ease": "soft"},
+				{"t": 0.45, "pose": "push", "ease": "soft"},
+				{"t": 0.72, "pose": "push", "ease": "soft"},
+				{"t": 1, "pose": "breathe"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 0,
+			"clip": "labor",
+			"face_keys": [
+				{
+					"t": 0,
+					"face": {"preset": "neutral", "baked": "neutral"}
+				},
+				{
+					"t": 0.42,
+					"face": {"preset": "blink", "baked": "closed"}
+				},
+				{
+					"t": 0.78,
+					"face": {"preset": "neutral", "baked": "neutral"}
+				}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "sweat",
+			"offset": [-0.22, 0.1, 0.05],
+			"to": 0.8,
+			"fade": 0.08,
+			"scale": 0.8,
+			"rise": -10,
+			"from": 0.35
+		},
+		{
+			"actor": "taker",
+			"part": "head",
+			"image": "breath",
+			"offset": [0.2, -0.4, 0.3],
+			"to": 0.98,
+			"fade": 0.06,
+			"scale": 0.8,
+			"rise": 6,
+			"facing": "front",
+			"from": 0.82
+		}
+	],
+	"stages": {
+		"lay": {
+			"loop": false,
+			"clips": {
+				"labor": {
+					"poses": {
+						"strain": {
+							"hip": [0, 0.78, -0.16],
+							"lean": 12,
+							"head_pitch": 9,
+							"spine_pitch": 7,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.72, 0.17],
+							"hand_r": [-0.85, 0.72, 0.17],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6]
+						},
+						"thrust": {
+							"hip": [0, 0.95, 0.25],
+							"lean": -10,
+							"head_pitch": -14,
+							"spine_pitch": -4,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.77, 0.12000000000000001],
+							"hand_r": [-0.85, 0.77, 0.12000000000000001],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6],
+							"pelvis_pitch": -18
+						},
+						"recoil": {
+							"hip": [0, 0.92, 0.08],
+							"lean": -4,
+							"head_pitch": -12,
+							"spine_pitch": -4,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.72, 0.17],
+							"hand_r": [-0.85, 0.72, 0.17],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6],
+							"pelvis_pitch": -8
+						},
+						"rest": {
+							"hip": [0, 0.86, -0.1],
+							"lean": 2,
+							"head_pitch": 10,
+							"spine_pitch": 4,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.72, 0.17],
+							"hand_r": [-0.85, 0.72, 0.17],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6]
+						}
+					},
+					"keys": [
+						{"t": 0, "pose": "breathe", "ease": "soft"},
+						{"t": 0.32, "pose": "strain", "ease": "soft"},
+						{"t": 0.44, "pose": "strain", "ease": "in"},
+						{"t": 0.52, "pose": "thrust", "ease": "out"},
+						{"t": 0.68, "pose": "recoil", "ease": "soft"},
+						{"t": 1, "pose": "rest"}
+					]
+				}
+			},
+			"effects": [
+				{
+					"actor": "taker",
+					"part": "head",
+					"image": "sweat",
+					"offset": [-0.22, 0.1, 0.05],
+					"to": 0.5,
+					"fade": 0.08,
+					"scale": 0.8,
+					"rise": -10,
+					"from": 0.1
+				},
+				{
+					"actor": "taker",
+					"part": "head",
+					"image": "sweat",
+					"offset": [0.24, 0.05, 0.05],
+					"to": 0.55,
+					"fade": 0.08,
+					"scale": 0.7,
+					"rise": -8,
+					"from": 0.2
+				},
+				{
+					"actor": "taker",
+					"part": "pelvis",
+					"image": "egg",
+					"to": 0.5,
+					"fade": 0.02,
+					"offset_keys": [{"t": 0.4, "offset": [0, -0.1, 0.02], "ease": "in"}, {"t": 0.5, "offset": [0, -0.14, 0.1]}],
+					"scale_keys": [{"t": 0.4, "scale": 0.26249999999999996, "ease": "out"}, {"t": 0.5, "scale": 0.75}],
+					"from": 0.4
+				},
+				{
+					"actor": "taker",
+					"part": "root",
+					"image": "egg",
+					"to": 1.0,
+					"offset_keys": [
+						{"t": 0.5, "offset": [0, 0.33, 0.18], "ease": "out"},
+						{"t": 0.57, "offset": [0, 0.38, 0.48], "ease": "in"},
+						{"t": 0.64, "offset": [0, 0.16, 0.93], "ease": "out"},
+						{"t": 0.69, "offset": [0, 0.23, 1.0], "ease": "in"},
+						{"t": 0.74, "offset": [0, 0.16, 1.04], "ease": "out"},
+						{"t": 0.9, "offset": [0, 0.16, 1.05]}
+					],
+					"scale_keys": [{"t": 0.5, "scale": 0.75}, {"t": 1, "scale": 0.75}],
+					"angle_keys": [
+						{"t": 0.5, "angle": 0, "ease": "linear"},
+						{"t": 0.64, "angle": 160, "ease": "out"},
+						{"t": 0.74, "angle": 240, "ease": "out"},
+						{"t": 0.9, "angle": 255}
+					],
+					"from": 0.5
+				},
+				{
+					"actor": "taker",
+					"part": "head",
+					"image": "breath",
+					"offset": [0.2, -0.4, 0.3],
+					"to": 0.85,
+					"fade": 0.06,
+					"scale": 0.8,
+					"rise": 6,
+					"facing": "front",
+					"from": 0.6
+				}
+			]
+		},
+		"after": {
+			"loop": false,
+			"clips": {
+				"labor": {
+					"poses": {
+						"rest": {
+							"hip": [0, 0.86, -0.1],
+							"lean": 2,
+							"head_pitch": 10,
+							"spine_pitch": 4,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.72, 0.17],
+							"hand_r": [-0.85, 0.72, 0.17],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6]
+						},
+						"rest2": {
+							"hip": [0, 0.87, -0.1],
+							"lean": 3,
+							"head_pitch": 13,
+							"spine_pitch": 5,
+							"foot_l": [0.62, 0.2, 0.1],
+							"foot_r": [-0.62, 0.2, 0.1],
+							"pole_leg_l": [1, 0.35, 0.5],
+							"pole_leg_r": [-1, 0.35, 0.5],
+							"hand_l": [0.85, 0.72, 0.17],
+							"hand_r": [-0.85, 0.72, 0.17],
+							"pole_arm_l": [1, 0.2, -0.6],
+							"pole_arm_r": [-1, 0.2, -0.6]
+						}
+					},
+					"keys": [
+						{"t": 0, "pose": "rest", "ease": "soft"},
+						{"t": 0.5, "pose": "rest2", "ease": "soft"},
+						{"t": 1, "pose": "rest"}
+					]
+				}
+			},
+			"effects": [
+				{
+					"actor": "taker",
+					"part": "root",
+					"image": "egg",
+					"to": 1.0,
+					"offset": [0, 0.16, 1.05],
+					"scale": 0.75,
+					"angle": 255,
+					"from": 0.0
+				},
+				{
+					"actor": "taker",
+					"part": "head",
+					"image": "blush",
+					"offset": [0, -0.2, 0.1],
+					"to": 1.0,
+					"scale": 0.7,
+					"facing": "front",
+					"from": 0.0
+				},
+				{
+					"actor": "taker",
+					"part": "head",
+					"image": "breath",
+					"offset": [0.2, -0.4, 0.3],
+					"to": 0.6,
+					"fade": 0.06,
+					"scale": 0.8,
+					"rise": 6,
+					"facing": "front",
+					"from": 0.3
+				}
+			]
+		}
+	},
+	"sequence": [
+		{"stage": "default", "cycles": 2},
+		{"stage": "lay", "cue": "lay"},
+		{"stage": "after", "hold": true, "cue": "born"}
+	],
+	"transition_markers": {"cycle_start": 0}
+}

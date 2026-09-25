@@ -1,0 +1,57 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "土下座。1体だけの場面。正座から上体を前へ倒し、両手を床について額を床にすりつける。何度も頭を下げ直すように、少し上体を起こしてはまた額を床へつける。斜め45°で真横に見える向き（yaw 135）。",
+	"version": 1,
+	"duration": 2.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"bow": {
+			"duration": 2.4,
+			"base": "all_fours",
+			"poses": {
+				"down": {
+					"hip": [0, 0.6, -0.4],
+					"lean": 90,
+					"spine_pitch": 14,
+					"head_pitch": 30,
+					"hand_l": [0.22, 0.13, 1.05],
+					"hand_r": [-0.22, 0.13, 1.05],
+					"pole_arm_l": [1, 0.2, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.5]
+				},
+				"up": {
+					"hip": [0, 0.64, -0.38],
+					"lean": 74,
+					"spine_pitch": 12,
+					"head_pitch": 10,
+					"hand_l": [0.22, 0.13, 1.05],
+					"hand_r": [-0.22, 0.13, 1.05],
+					"pole_arm_l": [1, 0.2, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.5]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "down"},
+				{"t": 0.45, "pose": "down", "ease": "soft"},
+				{"t": 0.65, "pose": "up", "ease": "soft"},
+				{"t": 1, "pose": "down"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 135,
+			"clip": "bow",
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "blink"}},
+				{"t": 0.6, "face": {"preset": "neutral"}},
+				{"t": 0.9, "face": {"preset": "blink"}}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": []
+}

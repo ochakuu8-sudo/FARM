@@ -1,0 +1,103 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "逆さ吊り。足首を縛られて天井から逆さに吊られ（lines の縄）、ゆっくり揺れて回る。腕は下へ垂れ、ときどき身をよじる。",
+	"version": 1,
+	"duration": 3.0,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 3.0,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0, 3.3, 0],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.12, 5.1, 0.0],
+					"foot_r": [-0.12, 5.1, 0.0],
+					"pole_leg_l": [0, 0, 1],
+					"pole_leg_r": [0, 0, 1],
+					"hand_l": [0.3, 2.9, 0.1],
+					"hand_r": [-0.3, 2.9, 0.1],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"l": {
+					"hip": [0.06, 3.3, 0.02],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.12, 5.1, 0.0],
+					"foot_r": [-0.12, 5.1, 0.0],
+					"pole_leg_l": [0, 0, 1],
+					"pole_leg_r": [0, 0, 1],
+					"hand_l": [0.4, 2.8, 0.2],
+					"hand_r": [-0.3, 2.9, 0.1],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0],
+					"twist": 12
+				},
+				"r": {
+					"hip": [-0.06, 3.3, -0.02],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.12, 5.1, 0.0],
+					"foot_r": [-0.12, 5.1, 0.0],
+					"pole_leg_l": [0, 0, 1],
+					"pole_leg_r": [0, 0, 1],
+					"hand_l": [0.3, 2.9, 0.1],
+					"hand_r": [-0.4, 2.8, 0.2],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0],
+					"twist": -12
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.25, "pose": "l", "ease": "soft"},
+				{"t": 0.5, "pose": "a"},
+				{"t": 0.75, "pose": "r", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude"
+		}
+	],
+	"constraints": [],
+	"lines": [
+		{"from": "taker.boot_l", "to_point": [0.0, 2.6, 0.0], "color": "#8a7550", "width": 0.005},
+		{"from": "taker.boot_r", "to_point": [0.0, 2.6, 0.0], "color": "#8a7550", "width": 0.005}
+	]
+}

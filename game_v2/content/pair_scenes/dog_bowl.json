@@ -1,0 +1,59 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "餌皿。四つん這いで尻を高く上げ、床の皿（effects の dog_bowl）に顔を突っ込んで食べさせられる。頭を上下させて食べる。",
+	"version": 1,
+	"duration": 1.0,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 1.0,
+			"base": "all_fours",
+			"poses": {
+				"a": {
+					"hip": [0, 1.08, 0.02],
+					"lean": 104,
+					"head_pitch": 48,
+					"hand_l": [0.42, 0.13, 0.86],
+					"hand_r": [-0.42, 0.13, 0.86]
+				},
+				"b": {
+					"hip": [0, 1.08, 0.02],
+					"lean": 98,
+					"head_pitch": 36,
+					"hand_l": [0.42, 0.13, 0.86],
+					"hand_r": [-0.42, 0.13, 0.86]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.4,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.46,
+					"face": {"preset": "neutral"}
+				}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": [{"actor": "taker", "part": "root", "image": "dog_bowl", "offset": [0, 0.05, 0.74], "scale": 0.7}]
+}

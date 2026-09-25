@@ -1,0 +1,132 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "雑巾がけ。四つん這いで右手の雑巾（effects の rag）を円く動かして床を拭かされる。後ろのゴブリンが、遅いと尻を叩く（位相0.45で当たる）。",
+	"version": 1,
+	"duration": 1.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"taker": {
+			"duration": 1.4,
+			"base": "all_fours",
+			"poses": {
+				"a": {"hip": [0, 1.0, 0], "lean": 90, "head_pitch": -45, "hand_r": [-0.4, 0.13, 1.15]},
+				"b": {"hip": [0, 1.0, 0], "lean": 90, "head_pitch": -45, "hand_r": [-0.25, 0.13, 1.3]},
+				"c": {"hip": [0, 1.0, 0], "lean": 90, "head_pitch": -45, "hand_r": [-0.1, 0.13, 1.15]},
+				"d": {"hip": [0, 1.0, 0], "lean": 90, "head_pitch": -45, "hand_r": [-0.25, 0.13, 1.0]},
+				"j": {"hip": [0, 1.04, 0.07], "lean": 90, "head_pitch": -65, "hand_r": [-0.4, 0.13, 1.15]}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.15, "pose": "b"},
+				{"t": 0.3, "pose": "c"},
+				{"t": 0.45, "pose": "a", "ease": "out"},
+				{"t": 0.55, "pose": "j", "ease": "soft"},
+				{"t": 0.7, "pose": "d"},
+				{"t": 0.85, "pose": "c"},
+				{"t": 1, "pose": "a"}
+			]
+		},
+		"goblin": {
+			"duration": 1.4,
+			"base": "stand",
+			"poses": {
+				"s": {
+					"hip": [0, 1.8, 0],
+					"lean": 42,
+					"head_pitch": -25,
+					"foot_l": [0.3, 0.2, 0.05],
+					"foot_r": [-0.3, 0.2, 0.05],
+					"hand_l": [0.45, 1.4, 0.4],
+					"pole_arm_l": [1, -0.3, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.6]
+				}
+			},
+			"keys": [{"t": 0, "pose": "s"}, {"t": 1, "pose": "s"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "taker",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.45,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.51,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude",
+			"press": {"from": "goblin", "parts": ["hand_r"], "radius": 0.14, "strength": 1.4, "max": 0.06}
+		},
+		{"id": "goblin", "character": 1, "root": [-0.45, 0, -0.25], "yaw": 45, "clip": "goblin"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_keys": [
+						{"t": 0, "offset": [-0.4, 0.7, 0.05]},
+						{"t": 0.2, "offset": [-0.44, 0.76, 0.03], "ease": "in"},
+						{"t": 0.32, "offset": [-0.36, 0.55, 0.06], "ease": "linear"},
+						{"t": 0.4, "offset": [-0.22, 0.3, 0.09], "ease": "linear"},
+						{"t": 0.45, "offset": [-0.12, 0.12, 0.1]},
+						{"t": 0.53, "offset": [-0.16, 0.18, 0.12], "ease": "soft"},
+						{"t": 1, "offset": [-0.4, 0.7, 0.05]}
+					]
+				},
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "elbow_r",
+					"offset": [-0.55, 0.55, 0.32],
+					"tolerance": 0.3
+				}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": [],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "pelvis",
+			"image": "slap",
+			"offset": [-0.1, 0.0, -0.2],
+			"from": 0.45,
+			"to": 0.6,
+			"fade": 0.04,
+			"scale": 0.5,
+			"pulse": 0.25
+		},
+		{
+			"actor": "taker",
+			"part": "hand_r",
+			"image": "rag",
+			"offset": [0, -0.06, 0],
+			"scale": 0.5,
+			"layer": "back"
+		}
+	]
+}

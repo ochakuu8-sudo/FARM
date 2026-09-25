@@ -1,0 +1,80 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "樽詰め。樽（effects の barrel、口の縁が画像の縦の真ん中）の中に膝立ちで押し込まれ、首から上だけが出ている。首を振り、肩を揺すって出ようともがく。斜め45°で正面（yaw 45）。",
+	"version": 1,
+	"duration": 2.0,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 2.0,
+			"base": "kneel",
+			"poses": {
+				"a": {
+					"hip": [0, 1.0, -0.28],
+					"lean": 6,
+					"head_pitch": 4,
+					"hand_l": [0.3, 1.2, 0.2],
+					"hand_r": [-0.3, 1.2, 0.2]
+				},
+				"l": {
+					"hip": [0.03, 1.0, -0.28],
+					"lean": 6,
+					"head_pitch": 4,
+					"hand_l": [0.3, 1.2, 0.2],
+					"hand_r": [-0.3, 1.2, 0.2],
+					"twist": 12,
+					"head_yaw": 35
+				},
+				"r": {
+					"hip": [-0.03, 1.0, -0.28],
+					"lean": 6,
+					"head_pitch": 14,
+					"hand_l": [0.3, 1.2, 0.2],
+					"hand_r": [-0.3, 1.2, 0.2],
+					"twist": -12,
+					"head_yaw": -35
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.25, "pose": "l", "ease": "soft"},
+				{"t": 0.5, "pose": "a"},
+				{"t": 0.75, "pose": "r", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 45,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": [{"actor": "taker", "part": "root", "image": "barrel", "offset": [0, 0.9, 0], "scale": 0.8}]
+}

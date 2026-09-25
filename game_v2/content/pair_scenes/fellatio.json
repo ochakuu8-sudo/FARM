@@ -1,0 +1,127 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "ご奉仕（口で）。女は正座から前へかがんで立ったゴブリンの腰に顔を寄せ、頭を前後させて奉仕する。両手は自分の腿の上。ゴブリンは両手で女の頭を押さえ（taker の頭に手を合わせる接触）、腰をわずかに前後させる。男性器は付属物（groin、aim で女の口へ向け、insert_keys で奥へ入った分を隠す）。位相0が最も深い。",
+	"version": 1,
+	"duration": 1.2,
+	"check": {"measure": "goblin.pelvis:taker.head", "phases": [0, 0.5], "view": 1},
+	"clips": {
+		"serve": {
+			"duration": 1.2,
+			"base": "kneel",
+			"poses": {
+				"deep": {
+					"hip": [0, 0.7, -0.2],
+					"lean": 64,
+					"spine_pitch": 6,
+					"head_pitch": -48,
+					"hand_l": [0.3, 0.72, 0.28],
+					"hand_r": [-0.3, 0.72, 0.28],
+					"pole_arm_l": [1, -0.2, -0.6],
+					"pole_arm_r": [-1, -0.2, -0.6]
+				},
+				"shallow": {
+					"hip": [0, 0.7, -0.3],
+					"lean": 54,
+					"spine_pitch": 4,
+					"head_pitch": -40,
+					"hand_l": [0.3, 0.72, 0.24],
+					"hand_r": [-0.3, 0.72, 0.24],
+					"pole_arm_l": [1, -0.2, -0.6],
+					"pole_arm_r": [-1, -0.2, -0.6]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "deep", "ease": "soft"},
+				{"t": 0.5, "pose": "shallow", "ease": "soft"},
+				{"t": 1, "pose": "deep"}
+			]
+		},
+		"hold_head": {
+			"duration": 1.2,
+			"base": "stand",
+			"poses": {
+				"in": {
+					"hip": [0, 2.0, 0.08],
+					"lean": -6,
+					"head_pitch": 28,
+					"pole_arm_l": [1, 0.2, -0.3],
+					"pole_arm_r": [-1, 0.2, -0.3]
+				},
+				"out": {
+					"hip": [0, 2.0, -0.02],
+					"lean": -2,
+					"head_pitch": 24,
+					"pole_arm_l": [1, 0.2, -0.3],
+					"pole_arm_r": [-1, 0.2, -0.3]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "soft"},
+				{"t": 0.5, "pose": "out", "ease": "soft"},
+				{"t": 1, "pose": "in"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 135,
+			"clip": "serve",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.35,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				}
+			]
+		},
+		{
+			"id": "goblin",
+			"character": 1,
+			"root": [0.537, 0, -0.537],
+			"yaw": -45,
+			"clip": "hold_head",
+			"props": {"groin": "erect"},
+			"aim": {
+				"slot": "groin",
+				"leader": "taker",
+				"leader_socket": "part:head",
+				"offset": [0, -0.2, 0.1],
+				"insert_keys": [{"t": 0, "insert": 0.45}, {"t": 0.5, "insert": 0.85}, {"t": 1, "insert": 0.45}]
+			}
+		}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:head",
+					"follower_goal": "hand_l",
+					"follower_socket": "part:hand_l",
+					"offset_space": "leader_local",
+					"offset": [-0.13, 0.08, -0.06]
+				},
+				{
+					"leader_socket": "part:head",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_space": "leader_local",
+					"offset": [0.13, 0.08, -0.06]
+				}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

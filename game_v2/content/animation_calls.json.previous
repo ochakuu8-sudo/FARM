@@ -1,0 +1,96 @@
+{
+	"actions": {
+		"attack": {
+			"clip": "attack",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"block": {
+			"clip": "block",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"captured": {
+			"clip": "captured",
+			"mode": "hold",
+			"speed": 1.0
+		},
+		"defeated": {
+			"clip": "defeated",
+			"mode": "hold",
+			"speed": 1.0
+		},
+		"disarm": {
+			"clip": "disarm",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"hit": {
+			"clip": "hit",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"idle": {
+			"clip": "idle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"inspect": {
+			"clip": "inspect",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"run": {
+			"clip": "run",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"walk": {
+			"clip": "walk",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"weak_attack": {
+			"clip": "weak_attack",
+			"mode": "once",
+			"speed": 1.0
+		}
+	},
+	"events": [
+		{
+			"event_kind": "interaction.block_started",
+			"symbol": "足止め"
+		},
+		{
+			"event_kind": "interaction.trap_resolved",
+			"symbol": "罠 発動"
+		},
+		{
+			"event_kind": "outcome.captured",
+			"symbol": "捕獲 → 収容"
+		},
+		{
+			"event_kind": "outcome.defeated",
+			"symbol": "撃破"
+		},
+		{
+			"event_kind": "door.closed",
+			"symbol": "扉 閉鎖"
+		},
+		{
+			"event_kind": "action.disarm_started",
+			"symbol": "解除中"
+		}
+	],
+	"profiles": {
+		"0": {},
+		"1": {
+			"attack": {
+				"clip": "claw_attack",
+				"mode": "once",
+				"speed": 1.0
+			}
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,93 @@
+{
+	"_guide": "顔の時間切替。0〜0.3は通常、0.3〜0.55は閉じ目、0.55〜0.8は片目、0.8以降は通常。各キーは前のキーではなく基準faceを上書き。tはactorの0〜1位相。",
+	"actors": [
+		{
+			"character": 0.0,
+			"clip": "idle",
+			"face": {
+				"preset": "neutral"
+			},
+			"face_keys": [
+				{
+					"face": {
+						"preset": "blink"
+					},
+					"t": 0.3
+				},
+				{
+					"face": {
+						"preset": "wink"
+					},
+					"t": 0.55
+				},
+				{
+					"face": {
+						"preset": "neutral"
+					},
+					"t": 0.8
+				}
+			],
+			"id": "adventurer",
+			"recipe": {
+				"expression": {
+					"brow_l": "original",
+					"brow_r": "original",
+					"eye_l": "open",
+					"eye_r": "open",
+					"mouth": "small"
+				},
+				"face": {
+					"brow_l": 0,
+					"brow_r": 0,
+					"eye_l": 0,
+					"eye_r": 0,
+					"mouth": 0
+				},
+				"head_scale": 1.0,
+				"height": 1.0,
+				"modules": {
+					"arms": 0,
+					"head": 0,
+					"legs": 0,
+					"lower_body": 0,
+					"upper_body": 0
+				},
+				"profile": {
+					"forearm": 0.27,
+					"head": 1.0,
+					"head_center_height": 0.45,
+					"hip_height": 0.878,
+					"hip_width": 0.17,
+					"neck": 0.05,
+					"shin": 0.33,
+					"shoulder": 0.275,
+					"thigh": 0.35,
+					"torso": 0.6,
+					"upper_arm": 0.29
+				},
+				"registration": {},
+				"seed": 100,
+				"thickness": 1.0,
+				"version": 1
+			},
+			"root": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"yaw": 0.0
+		}
+	],
+	"capture": {
+		"output": "res://mini/layered2d/output/face_timeline",
+		"phases": [
+			0.299,
+			0.3,
+			0.55,
+			0.8
+		],
+		"sizes": "700"
+	},
+	"duration": 3.0,
+	"version": 1.0
+}

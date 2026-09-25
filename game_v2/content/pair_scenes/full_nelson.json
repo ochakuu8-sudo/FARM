@@ -1,0 +1,343 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "フルネルソン。ゴブリンが背後から冒険者を抱え上げ、両腕を膝裏に通して（肘の目標を膝の下に置く）肩の後ろをつかむ。首の後ろで組むのはゴブリンの腕の長さでは届かない。冒険者は背を少し丸めて脚をV字に開く。冒険者の上下とゴブリンの腰の前後を同期させる。位相0が下（腰が最も前）。下りは速く着く（ease in）、上りは速く出る（ease out）。",
+	"version": 1,
+	"duration": 1.0,
+	"check": {
+		"measure": "goblin.elbow_l:taker.knee_l,goblin.wrist_l:taker.shoulder_l",
+		"phases": [0, 0.5],
+		"view": 1,
+		"fit": {
+			"params": [
+				{"path": "actors.1.root", "axes": [0, 2], "step": 0.04, "range": 0.3},
+				{"path": "clips.nelson_hold.poses.in.hip", "axes": [1, 2], "step": 0.06, "range": 0.4},
+				{"path": "clips.nelson_hold.poses.out.hip", "axes": [1, 2], "step": 0.06, "range": 0.4}
+			],
+			"goals": [
+				{"measure": "goblin.elbow_l:taker.knee_l", "max": 0.1, "weight": 2},
+				{"measure": "goblin.elbow_r:taker.knee_r", "max": 0.1, "weight": 2},
+				{"measure": "goblin.part:head:taker.part:head", "min": 0.25},
+				{"measure": "goblin.pelvis:taker.pelvis", "min": 0.14}
+			],
+			"phases": [0, 0.5],
+			"iterations": 12
+		}
+	},
+	"clips": {
+		"held_nelson": {
+			"duration": 1.0,
+			"base": "stand",
+			"poses": {
+				"down": {
+					"hip": [0, 1.62, 0],
+					"lean": -8.0,
+					"head_pitch": 18,
+					"foot_l": [0.66, 3.75, 0.42],
+					"foot_r": [-0.66, 3.75, 0.42],
+					"pole_leg_l": [-0.5, 0.9, 0.1],
+					"pole_leg_r": [0.5, 0.9, 0.1],
+					"hand_l": [0.75, 2.5, -0.1],
+					"hand_r": [-0.75, 2.5, -0.1],
+					"pole_arm_l": [1, -1, 0],
+					"pole_arm_r": [-1, -1, 0],
+					"support": "feet",
+					"spine_pitch": 8.0
+				},
+				"up": {
+					"hip": [0, 1.74, 0.02],
+					"lean": -4.0,
+					"head_pitch": 12,
+					"foot_l": [0.66, 3.87, 0.42],
+					"foot_r": [-0.66, 3.87, 0.42],
+					"pole_leg_l": [-0.5, 0.9, 0.1],
+					"pole_leg_r": [0.5, 0.9, 0.1],
+					"hand_l": [0.75, 2.7199999999999998, -0.1],
+					"hand_r": [-0.75, 2.7199999999999998, -0.1],
+					"pole_arm_l": [1, -1, 0],
+					"pole_arm_r": [-1, -1, 0],
+					"support": "feet",
+					"spine_pitch": 4.0
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "down", "ease": "out"},
+				{"t": 0.5, "pose": "up", "ease": "in"},
+				{"t": 1, "pose": "down"}
+			]
+		},
+		"nelson_hold": {
+			"duration": 1.0,
+			"base": "stand",
+			"poses": {
+				"in": {
+					"hip": [0.0, 1.525, 0.145],
+					"lean": -4,
+					"head_pitch": -8,
+					"pole_arm_l": [1.4, -2, 0.8],
+					"pole_arm_r": [-1.4, -2, 0.8],
+					"support": "feet"
+				},
+				"out": {
+					"hip": [0, 1.63, -0.0225],
+					"lean": 4,
+					"head_pitch": -4,
+					"pole_arm_l": [1.4, -2, 0.8],
+					"pole_arm_r": [-1.4, -2, 0.8],
+					"support": "feet"
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "out"},
+				{"t": 0.5, "pose": "out", "ease": "in"},
+				{"t": 1, "pose": "in"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 45,
+			"clip": "held_nelson",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "blink", "baked": "closed"}
+				},
+				{
+					"t": 0.2,
+					"face": {"preset": "neutral", "baked": "neutral"}
+				},
+				{
+					"t": 0.85,
+					"face": {"preset": "blink", "baked": "closed"}
+				}
+			]
+		},
+		{"id": "goblin", "character": 1, "root": [-0.1025, 0.0, -0.14], "yaw": 45, "clip": "nelson_hold"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "joint:shoulder_l",
+					"follower_goal": "hand_l",
+					"follower_socket": "joint:wrist_l",
+					"offset": [0, -0.06, -0.12],
+					"offset_space": "leader_local"
+				},
+				{
+					"leader_socket": "joint:shoulder_r",
+					"follower_goal": "hand_r",
+					"follower_socket": "joint:wrist_r",
+					"offset": [0, -0.06, -0.12],
+					"offset_space": "leader_local"
+				},
+				{
+					"leader_socket": "joint:knee_l",
+					"follower_goal": "elbow_l",
+					"offset": [0, -0.05, 0],
+					"tolerance": 0.06
+				},
+				{
+					"leader_socket": "joint:knee_r",
+					"follower_goal": "elbow_r",
+					"offset": [0, -0.05, 0],
+					"tolerance": 0.06
+				}
+			]
+		}
+	],
+	"by_body": {
+		"0": {
+			"stages.climax.clips.held_nelson.poses.limp.lean": -4.0,
+			"stages.climax.clips.held_nelson.poses.limp.spine_pitch": 0.0,
+			"stages.after.clips.held_nelson.poses.limp.lean": -4.0,
+			"stages.after.clips.held_nelson.poses.limp.spine_pitch": 0.0,
+			"stages.after.clips.held_nelson.poses.limp2.lean": -4.0,
+			"stages.after.clips.held_nelson.poses.limp2.spine_pitch": -3.0
+		}
+	},
+	"stages": {
+		"strong": {
+			"clips": {
+				"held_nelson": {
+					"poses": {
+						"up": {
+							"hip": [0, 1.8, 0.03],
+							"lean": 0.0,
+							"foot_l": [0.7000000000000001, 3.9299999999999997, 0.42],
+							"foot_r": [-0.7000000000000001, 3.9299999999999997, 0.42],
+							"hand_l": [0.75, 2.82, -0.1],
+							"hand_r": [-0.75, 2.82, -0.1],
+							"spine_pitch": 2.0
+						}
+					}
+				},
+				"nelson_hold": {
+					"poses": {
+						"out": {"hip": [0, 1.66, -0.03], "lean": 6}
+					}
+				}
+			}
+		},
+		"climax": {
+			"loop": false,
+			"clips": {
+				"held_nelson": {
+					"poses": {
+						"up_high": {
+							"hip": [0, 1.74, 0.02],
+							"lean": -4.0,
+							"head_pitch": 12,
+							"foot_l": [0.66, 3.87, 0.42],
+							"foot_r": [-0.66, 3.87, 0.42],
+							"pole_leg_l": [-0.5, 0.9, 0.1],
+							"pole_leg_r": [0.5, 0.9, 0.1],
+							"hand_l": [0.75, 2.7199999999999998, -0.1],
+							"hand_r": [-0.75, 2.7199999999999998, -0.1],
+							"pole_arm_l": [1, -1, 0],
+							"pole_arm_r": [-1, -1, 0],
+							"support": "feet",
+							"spine_pitch": 4.0
+						},
+						"deep": {
+							"hip": [0, 1.6, 0.01],
+							"lean": -10,
+							"head_pitch": -24,
+							"foot_l": [0.66, 3.75, 0.42],
+							"foot_r": [-0.66, 3.75, 0.42],
+							"pole_leg_l": [-0.5, 0.9, 0.1],
+							"pole_leg_r": [0.5, 0.9, 0.1],
+							"hand_l": [0.75, 2.5, -0.1],
+							"hand_r": [-0.75, 2.5, -0.1],
+							"pole_arm_l": [1, -1, 0],
+							"pole_arm_r": [-1, -1, 0],
+							"support": "feet",
+							"spine_pitch": -6
+						},
+						"limp": {
+							"hip": [0, 1.6, 0],
+							"lean": 6,
+							"head_pitch": 32,
+							"foot_l": [0.66, 3.75, 0.42],
+							"foot_r": [-0.66, 3.75, 0.42],
+							"pole_leg_l": [-0.5, 0.9, 0.1],
+							"pole_leg_r": [0.5, 0.9, 0.1],
+							"hand_l": [0.62, 2.25, 0.1],
+							"hand_r": [-0.62, 2.25, 0.1],
+							"pole_arm_l": [1, -1, 0],
+							"pole_arm_r": [-1, -1, 0],
+							"support": "feet",
+							"spine_pitch": 18
+						}
+					},
+					"keys": [
+						{"t": 0, "pose": "down", "ease": "out"},
+						{"t": 0.25, "pose": "up_high", "ease": "in"},
+						{"t": 0.45, "pose": "deep", "ease": "soft"},
+						{"t": 1, "pose": "limp"}
+					]
+				},
+				"nelson_hold": {
+					"poses": {
+						"deep_in": {
+							"hip": [0, 1.54, 0.16],
+							"lean": -8,
+							"head_pitch": -8,
+							"pole_arm_l": [1.4, -2, 0.8],
+							"pole_arm_r": [-1.4, -2, 0.8],
+							"support": "feet"
+						},
+						"rest": {
+							"hip": [0, 1.56, 0.12],
+							"lean": 0,
+							"head_pitch": -8,
+							"pole_arm_l": [1.4, -2, 0.8],
+							"pole_arm_r": [-1.4, -2, 0.8],
+							"support": "feet"
+						}
+					},
+					"keys": [
+						{"t": 0, "pose": "in", "ease": "out"},
+						{"t": 0.25, "pose": "out", "ease": "in"},
+						{"t": 0.45, "pose": "deep_in", "ease": "soft"},
+						{"t": 1, "pose": "rest"}
+					]
+				}
+			}
+		},
+		"after": {
+			"loop": false,
+			"clips": {
+				"held_nelson": {
+					"poses": {
+						"limp": {
+							"hip": [0, 1.6, 0],
+							"lean": 6,
+							"head_pitch": 32,
+							"foot_l": [0.66, 3.75, 0.42],
+							"foot_r": [-0.66, 3.75, 0.42],
+							"pole_leg_l": [-0.5, 0.9, 0.1],
+							"pole_leg_r": [0.5, 0.9, 0.1],
+							"hand_l": [0.62, 2.25, 0.1],
+							"hand_r": [-0.62, 2.25, 0.1],
+							"pole_arm_l": [1, -1, 0],
+							"pole_arm_r": [-1, -1, 0],
+							"support": "feet",
+							"spine_pitch": 18
+						},
+						"limp2": {
+							"hip": [0, 1.61, 0.005],
+							"lean": 6,
+							"head_pitch": 32,
+							"foot_l": [0.66, 3.75, 0.42],
+							"foot_r": [-0.66, 3.75, 0.42],
+							"pole_leg_l": [-0.5, 0.9, 0.1],
+							"pole_leg_r": [0.5, 0.9, 0.1],
+							"hand_l": [0.62, 2.25, 0.1],
+							"hand_r": [-0.62, 2.25, 0.1],
+							"pole_arm_l": [1, -1, 0],
+							"pole_arm_r": [-1, -1, 0],
+							"support": "feet",
+							"spine_pitch": 15
+						}
+					},
+					"keys": [{"t": 0, "pose": "limp"}, {"t": 0.5, "pose": "limp2"}, {"t": 1, "pose": "limp"}]
+				},
+				"nelson_hold": {
+					"poses": {
+						"rest": {
+							"hip": [0, 1.56, 0.12],
+							"lean": 0,
+							"head_pitch": -8,
+							"pole_arm_l": [1.4, -2, 0.8],
+							"pole_arm_r": [-1.4, -2, 0.8],
+							"support": "feet"
+						},
+						"rest2": {
+							"hip": [0, 1.57, 0.11],
+							"lean": 1,
+							"head_pitch": -8,
+							"pole_arm_l": [1.4, -2, 0.8],
+							"pole_arm_r": [-1.4, -2, 0.8],
+							"support": "feet"
+						}
+					},
+					"keys": [{"t": 0, "pose": "rest"}, {"t": 0.5, "pose": "rest2"}, {"t": 1, "pose": "rest"}]
+				}
+			}
+		}
+	},
+	"sequence": [
+		{"stage": "default", "cycles": 2},
+		{"stage": "strong", "cycles": 3},
+		{"stage": "climax", "cue": "climax", "pause": 0.12},
+		{"stage": "after", "hold": true, "cue": "after"}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": [{"before": "goblin.head", "after": "taker.head", "directions": [7, 0, 1, 2, 3]}]
+}

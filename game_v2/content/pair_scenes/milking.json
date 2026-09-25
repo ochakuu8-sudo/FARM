@@ -1,0 +1,96 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "四つん這いの搾乳。女は四つん這い（all_fours）で、胸の下に木の桶（effects の bucket、体より奥に描く）。ゴブリンが横に膝立ちで入り、胸の下から左右の手を交互に下へ引いて搾る。引くたびに胸が揺れ（press）、乳のしずくが桶へ落ちる（milk_drop）。女は引かれるたびに体を前後に揺らす。",
+	"version": 1,
+	"duration": 1.6,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 0},
+	"clips": {
+		"fours": {
+			"duration": 1.6,
+			"base": "all_fours",
+			"poses": {
+				"a": {"hip": [0, 1.0, 0], "lean": 88, "head_pitch": -62},
+				"b": {"hip": [0, 0.98, -0.05], "lean": 92, "head_pitch": -50}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.25, "pose": "b"},
+				{"t": 0.5, "pose": "a"},
+				{"t": 0.75, "pose": "b"},
+				{"t": 1, "pose": "a"}
+			]
+		},
+		"kneel_milk": {
+			"duration": 1.6,
+			"base": "kneel",
+			"poses": {
+				"k": {
+					"hip": [0, 0.62, -0.1],
+					"lean": 50,
+					"head_pitch": -30,
+					"pole_arm_l": [1, -0.6, -0.4],
+					"pole_arm_r": [-1, -0.6, -0.4]
+				}
+			},
+			"keys": [{"t": 0, "pose": "k"}, {"t": 1, "pose": "k"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "fours",
+			"outfit": "topless",
+			"press": {"from": "goblin", "radius": 0.14, "strength": 1.0, "max": 0.05},
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "neutral"}},
+				{"t": 0.2, "face": {"preset": "blink"}},
+				{"t": 0.32, "face": {"preset": "neutral"}},
+				{"t": 0.7, "face": {"preset": "blink"}},
+				{"t": 0.82, "face": {"preset": "neutral"}}
+			]
+		},
+		{"id": "goblin", "character": 1, "root": [0.41, 0, -0.42], "yaw": 0, "clip": "kneel_milk"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_l",
+					"follower_socket": "part:hand_l",
+					"offset_space": "leader_local",
+					"offset_keys": [
+						{"t": 0, "offset": [0.09, -0.08, 0.0]},
+						{"t": 0.5, "offset": [0.09, -0.2, 0.0], "ease": "out"},
+						{"t": 1, "offset": [0.09, -0.08, 0.0]}
+					]
+				},
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_space": "leader_local",
+					"offset_keys": [
+						{"t": 0, "offset": [-0.09, -0.2, 0.0], "ease": "out"},
+						{"t": 0.5, "offset": [-0.09, -0.08, 0.0]},
+						{"t": 1, "offset": [-0.09, -0.2, 0.0]}
+					]
+				}
+			]
+		}
+	],
+	"effects": [
+		{"actor": "taker", "part": "root", "image": "bucket", "offset": [0, 0.13, 0.3], "scale": 0.42, "layer": "back"},
+		{"actor": "taker", "part": "root", "image": "milk_drop", "from": 0.35, "to": 0.62, "fade": 0.05, "scale": 0.5,
+		 "offset_keys": [{"t": 0.35, "offset": [0.06, 0.4, 0.28]}, {"t": 0.62, "offset": [0.06, 0.2, 0.28], "ease": "in"}]},
+		{"actor": "taker", "part": "root", "image": "milk_drop", "from": 0.85, "to": 0.12, "fade": 0.05, "scale": 0.5,
+		 "offset_keys": [{"t": 0, "offset": [-0.06, 0.3, 0.28]}, {"t": 0.12, "offset": [-0.06, 0.2, 0.28], "ease": "in"}, {"t": 0.85, "offset": [-0.06, 0.4, 0.28]}, {"t": 1, "offset": [-0.06, 0.33, 0.28]}]}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

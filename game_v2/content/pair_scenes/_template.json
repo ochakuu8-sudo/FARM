@@ -1,0 +1,57 @@
+{
+	"_notes": [
+		"このファイルは読み込まれない（先頭が _ ）。複製して <場面ID>.json にする。ファイル名がそのまま場面IDになる。",
+		"cast: taker=受け側、partner=相手。原型ID（content/animation_profiles.json）か役割名 adventurer / monster。特定の魔物専用の動きなら partner は原型IDで絞る。",
+		"actors[0] が受け側、actors[1] が相手。ゲームでは受け側が出来事の target_actor、相手が source_actor。",
+		"ゲームは横向き（方向0）で再生する。yaw 90 で並べると横から見た構図になる。",
+		"接触は constraints で作る。leader_socket は part:chest / joint:wrist_l など、follower_goal は hand_l など。offset_space leader_local で受け側の体に貼り付く。",
+		"相手の立ち位置（actors[1].root）は体格差で届かなくなる。scene_check.gd --search で全体型に通る位置を探す。",
+		"stages は強弱の段階。duration は変えない（揺れの残り方が変わり、切り替えの瞬間に形がずれる）。振れ幅で強弱をつける。全段階で位相0の姿勢を揃える。",
+		"face_keys（表情）は顔が一枚絵の体型では自動で外される。",
+		"確認: Godotコンソール版で --path . --script res://game_v2/tools/scene_watch.gd -- --scene=<場面ID> --probe（保存のたびに確認）。単発は scene_check.gd。全項目は docs/2体場面の作り方.md",
+		"check 欄は確認の既定値（measure / phases / view / zoom / times / tune）。不要なら消してよい"
+	],
+	"check": {"phases": [0, 0.25, 0.5, 0.75]},
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"version": 1,
+	"duration": 1.6,
+	"clips": {
+		"taker_loop": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {"hip": [0, 2.0, 0], "lean": 0},
+				"b": {"hip": [0, 1.97, 0.04], "lean": -8}
+			},
+			"keys": [{"t": 0, "pose": "a"}, {"t": 0.5, "pose": "b"}, {"t": 1, "pose": "a"}]
+		},
+		"partner_loop": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"p": {"hip": [0, 1.76, 0.04], "lean": 6, "hand_l": [0.4, 2.5, 0.5], "hand_r": [-0.4, 2.5, 0.5]},
+				"q": {"hip": [0, 1.7, 0.1], "lean": 12}
+			},
+			"keys": [{"t": 0, "pose": "p"}, {"t": 0.5, "pose": "q"}, {"t": 1, "pose": "p"}]
+		}
+	},
+	"actors": [
+		{"id": "taker", "character": 0, "root": [0, 0, 0], "yaw": 90, "clip": "taker_loop"},
+		{"id": "partner", "character": 1, "root": [-0.38, 0, -0.15], "yaw": 90, "clip": "partner_loop"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "partner",
+			"bindings": [
+				{"leader_socket": "part:chest", "follower_goal": "hand_l", "follower_socket": "part:hand_l", "offset": [0.16, 0, 0.22], "offset_space": "leader_local"},
+				{"leader_socket": "part:chest", "follower_goal": "hand_r", "follower_socket": "part:hand_r", "offset": [-0.16, 0, 0.22], "offset_space": "leader_local"}
+			]
+		}
+	],
+	"stages": {
+		"strong": {"clips": {"taker_loop": {"poses": {"b": {"lean": -14}}}}}
+	},
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

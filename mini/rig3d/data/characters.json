@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "characters": [
+    {
+      "id": "explorer",
+      "name": "標準体格",
+      "head": 1.0,
+      "hip_height": 2.06,
+      "torso": 0.78,
+      "neck": 0.16,
+      "thigh": 1.0,
+      "shin": 0.9,
+      "upper_arm": 0.62,
+      "forearm": 0.56,
+      "shoulder": 0.46,
+      "hip_width": 0.23,
+      "coat": "#356c77",
+      "pants": "#354254",
+      "skin": "#e9bd8e",
+      "hair": "#603d31"
+    },
+    {
+      "id": "ranger",
+      "name": "長い手足の体格",
+      "head": 1.0,
+      "hip_height": 2.16,
+      "torso": 0.69,
+      "neck": 0.15,
+      "thigh": 1.08,
+      "shin": 0.92,
+      "upper_arm": 0.65,
+      "forearm": 0.58,
+      "shoulder": 0.5,
+      "hip_width": 0.25,
+      "coat": "#a47448",
+      "pants": "#32494b",
+      "skin": "#c88f67",
+      "hair": "#333744"
+    }
+  ]
+}

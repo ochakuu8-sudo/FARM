@@ -1,0 +1,125 @@
+{
+	"_note": "大陸（企画書 4.1・10章、設計書 8章）。regions は地方＝章（並びが章の順）。pos は地図の上の位置（0〜1）。hunts は狩場の型：jobs は出る職の重み、size は人数、power は能力の倍率の幅、cost は1戦目のスタミナ、chain は連戦の数、reward は1戦ごとのお金、board は地形。story はストーリー戦（stages の ID を順に）。stages：cost はスタミナ、chain は戦闘の並び（party の1人は job と、名前付きなら named、名前なしなら power。at は置き場所）、final は勝つとゲームの終わり。boards は 14×8 の地形（. 床 / # 崖 / ~ 川 / \" 森）。左の4列はこちらの置き場なので床にしておく。一行は右の5列に陣を組む（sites.gd の place_party）。escort_to は、ストーリー戦の一行がこの人数より少ないときに、その地方の狩場の職の護衛で埋める人数（最初の1戦は埋めない）。",
+	"regions": [
+		{"id": "foothill", "name": "麓の村", "escort_to": 3, "pos": [0.16, 0.64], "color": "#8a7a50", "intro": "魔王城のすぐ外の小さな村。召喚した魔物で村の女を攫う。",
+			"hunts": [{"id": "outskirts", "name": "村はずれ", "icon": "flag", "jobs": {"villager": 100}, "size": [3, 4], "power": [0.9, 1.1], "cost": 15, "chain": 1, "reward": 20, "board": "open"}],
+			"story": ["foothill_1", "foothill_2"]},
+		{"id": "frontier", "name": "辺境の街道", "escort_to": 4, "pos": [0.33, 0.52], "color": "#a08a60", "intro": "魔物の噂を聞きつけた冒険者が集まる街道。",
+			"hunts": [{"id": "highway", "name": "街道", "icon": "flag", "jobs": {"warrior": 40, "thief": 40, "villager": 20}, "size": [4, 5], "power": [1.0, 1.3], "cost": 20, "chain": 1, "reward": 40, "board": "road"},
+				{"id": "camp", "name": "野営地", "icon": "castle", "jobs": {"warrior": 30, "thief": 30, "priest": 20, "knight": 20}, "size": [4, 6], "power": [1.1, 1.4], "cost": 40, "chain": 2, "reward": 60, "board": "ruin"}],
+			"story": ["frontier_1", "frontier_2"]},
+		{"id": "forest", "name": "盗賊の森", "escort_to": 5, "pos": [0.47, 0.32], "color": "#5a7a4a", "intro": "盗賊団が根城にする深い森。",
+			"hunts": [{"id": "hideout", "name": "隠れ家", "icon": "castle", "jobs": {"thief": 60, "warrior": 20, "mage": 20}, "size": [5, 6], "power": [1.3, 1.6], "cost": 30, "chain": 2, "reward": 60, "board": "forest"},
+				{"id": "spring", "name": "森の泉", "icon": "flag", "jobs": {"villager": 30, "priest": 30, "thief": 40}, "size": [4, 5], "power": [1.2, 1.5], "cost": 20, "chain": 1, "reward": 45, "board": "river"}],
+			"story": ["forest_1", "forest_2"]},
+		{"id": "church", "name": "教会領", "escort_to": 5, "pos": [0.6, 0.58], "color": "#c8b878", "intro": "魔の巣を清めよと、教会が聖女を送り出した。",
+			"hunts": [{"id": "monastery", "name": "修道院", "icon": "castle", "jobs": {"priest": 60, "knight": 20, "villager": 20}, "size": [5, 6], "power": [1.5, 1.8], "cost": 30, "chain": 1, "reward": 70, "board": "ruin"},
+				{"id": "pilgrim", "name": "巡礼路", "icon": "flag", "jobs": {"priest": 40, "knight": 30, "warrior": 30}, "size": [5, 6], "power": [1.5, 1.8], "cost": 40, "chain": 2, "reward": 80, "board": "road"}],
+			"story": ["church_1", "church_2"]},
+		{"id": "kingdom", "name": "騎士の国", "escort_to": 5, "pos": [0.74, 0.4], "color": "#5f7ca8", "intro": "妹を奪われた騎士団長が、重装の討伐隊を率いる。",
+			"hunts": [{"id": "fort", "name": "砦", "icon": "castle", "jobs": {"knight": 60, "warrior": 20, "priest": 20}, "size": [5, 7], "power": [1.7, 2.0], "cost": 40, "chain": 2, "reward": 100, "board": "narrow"},
+				{"id": "town", "name": "城下町", "icon": "flag", "jobs": {"villager": 30, "mage": 30, "thief": 20, "knight": 20}, "size": [5, 6], "power": [1.6, 1.9], "cost": 30, "chain": 1, "reward": 80, "board": "open"}],
+			"story": ["kingdom_1", "kingdom_2"]},
+		{"id": "wildwood", "name": "亜人の森と宮廷", "escort_to": 5, "pos": [0.62, 0.18], "color": "#7a5a9a", "intro": "人ならぬ女たちの棲む森。その先で宮廷魔術師が待つ。",
+			"hunts": [{"id": "marsh", "name": "蛇の沼", "icon": "flag", "jobs": {"lamia": 60, "beastfolk": 40}, "size": [5, 6], "power": [1.8, 2.1], "cost": 40, "chain": 1, "reward": 100, "board": "river"},
+				{"id": "grove", "name": "森の奥", "icon": "flag", "jobs": {"dark_elf": 50, "beastfolk": 30, "succubus": 20}, "size": [5, 7], "power": [1.8, 2.1], "cost": 45, "chain": 2, "reward": 110, "board": "forest"},
+				{"id": "night_hall", "name": "夜の館", "icon": "castle", "jobs": {"succubus": 60, "mage": 40}, "size": [5, 6], "power": [1.9, 2.2], "cost": 45, "chain": 1, "reward": 120, "board": "ruin"}],
+			"story": ["wildwood_1", "wildwood_2"]},
+		{"id": "holy_city", "name": "聖都", "escort_to": 5, "pos": [0.86, 0.66], "color": "#e8d080", "intro": "父を討った勇者が待つ都。",
+			"hunts": [{"id": "cathedral", "name": "大聖堂", "icon": "castle", "jobs": {"priest": 40, "knight": 40, "mage": 20}, "size": [6, 7], "power": [2.0, 2.3], "cost": 45, "chain": 2, "reward": 140, "board": "ruin"}],
+			"story": ["holy_city_1", "holy_city_2"]}
+	],
+	"stages": {
+		"foothill_1": {"name": "村の見張り", "cost": 15, "board": "open", "chain": [{"reward": 30, "party": [{"job": "villager", "power": 1.0}, {"job": "villager", "power": 1.0}]}]},
+		"foothill_2": {"name": "村の自警団", "cost": 25, "board": "road", "chain": [
+			{"reward": 30, "party": [{"job": "villager", "power": 1.1}, {"job": "villager", "power": 1.1}]},
+			{"reward": 60, "party": [{"job": "villager", "power": 1.1}, {"job": "villager", "power": 1.2}, {"job": "warrior", "power": 0.9}]}]},
+		"frontier_1": {"name": "冒険者の一行", "cost": 30, "board": "road", "chain": [{"reward": 80, "party": [{"job": "warrior", "power": 1.3}, {"job": "thief", "power": 1.3}, {"job": "priest", "power": 1.3}]}]},
+		"frontier_2": {"name": "女剣士ガルダ", "cost": 45, "board": "ruin", "chain": [
+			{"reward": 60, "party": [{"job": "thief", "power": 1.4}, {"job": "warrior", "power": 1.4}, {"job": "villager", "power": 1.4}]},
+			{"reward": 150, "party": [{"job": "warrior", "named": "garda"}, {"job": "thief", "power": 1.4}, {"job": "priest", "power": 1.4}]}]},
+		"forest_1": {"name": "盗賊団の見張り", "cost": 30, "board": "forest", "chain": [{"reward": 100, "party": [{"job": "thief", "power": 1.6}, {"job": "thief", "power": 1.6}, {"job": "mage", "power": 1.5}]}]},
+		"forest_2": {"name": "盗賊団の頭ミア", "cost": 45, "board": "forest", "chain": [
+			{"reward": 80, "party": [{"job": "thief", "power": 1.7}, {"job": "warrior", "power": 1.6}, {"job": "thief", "power": 1.7}]},
+			{"reward": 180, "party": [{"job": "thief", "named": "mia"}, {"job": "thief", "power": 1.7}, {"job": "mage", "power": 1.6}, {"job": "warrior", "power": 1.6}]}]},
+		"church_1": {"name": "巡礼の護衛", "cost": 30, "board": "road", "chain": [{"reward": 120, "party": [{"job": "knight", "power": 1.8}, {"job": "priest", "power": 1.8}, {"job": "priest", "power": 1.7}]}]},
+		"church_2": {"name": "聖女セラ", "cost": 45, "board": "ruin", "chain": [
+			{"reward": 100, "party": [{"job": "knight", "power": 1.9}, {"job": "priest", "power": 1.9}, {"job": "warrior", "power": 1.8}]},
+			{"reward": 220, "party": [{"job": "priest", "named": "sera"}, {"job": "knight", "power": 1.9}, {"job": "knight", "power": 1.9}, {"job": "priest", "power": 1.8}]}]},
+		"kingdom_1": {"name": "国境の砦", "cost": 40, "board": "narrow", "chain": [{"reward": 150, "party": [{"job": "knight", "power": 2.0}, {"job": "knight", "power": 2.0}, {"job": "priest", "power": 1.9}, {"job": "warrior", "power": 1.9}]}]},
+		"kingdom_2": {"name": "騎士団長リーナ", "cost": 50, "board": "narrow", "chain": [
+			{"reward": 120, "party": [{"job": "knight", "power": 2.1}, {"job": "knight", "power": 2.1}, {"job": "warrior", "power": 2.0}]},
+			{"reward": 260, "party": [{"job": "knight", "named": "rina"}, {"job": "knight", "power": 2.1}, {"job": "priest", "power": 2.0}, {"job": "warrior", "power": 2.0}]}]},
+		"wildwood_1": {"name": "亜人の見張り", "cost": 40, "board": "forest", "chain": [{"reward": 170, "party": [{"job": "lamia", "power": 2.1}, {"job": "beastfolk", "power": 2.1}, {"job": "dark_elf", "power": 2.0}]}]},
+		"wildwood_2": {"name": "宮廷魔術師ヴェラ", "cost": 50, "board": "ruin", "chain": [
+			{"reward": 140, "party": [{"job": "mage", "power": 2.2}, {"job": "knight", "power": 2.2}, {"job": "succubus", "power": 2.1}]},
+			{"reward": 300, "party": [{"job": "mage", "named": "vera"}, {"job": "mage", "power": 2.2}, {"job": "knight", "power": 2.2}, {"job": "thief", "power": 2.2}]}]},
+		"holy_city_1": {"name": "聖都の門", "cost": 45, "board": "narrow", "chain": [{"reward": 200, "party": [{"job": "knight", "power": 2.3}, {"job": "knight", "power": 2.3}, {"job": "priest", "power": 2.3}, {"job": "mage", "power": 2.3}]}]},
+		"holy_city_2": {"name": "勇者パーティ", "cost": 65, "board": "open", "final": true, "chain": [
+			{"reward": 150, "party": [{"job": "knight", "power": 2.4}, {"job": "knight", "power": 2.4}, {"job": "priest", "power": 2.3}]},
+			{"reward": 150, "party": [{"job": "mage", "power": 2.4}, {"job": "warrior", "power": 2.4}, {"job": "thief", "power": 2.4}]},
+			{"reward": 500, "party": [{"job": "hero", "named": "alicia"}, {"job": "warrior", "named": "kaguya"}, {"job": "priest", "named": "clarice"}]}]}
+	},
+	"boards": {
+		"open": [
+			"..............",
+			"..............",
+			"..............",
+			"..............",
+			"..............",
+			"..............",
+			"..............",
+			".............."
+		],
+		"road": [
+			"....\"\"\"\"\"\"....",
+			"....\"\"....\"\"..",
+			"..............",
+			"......#.......",
+			".........#....",
+			"..............",
+			"....\"\"..\"\"\"\"..",
+			"....\"\"\"\"\"\"\"\".."
+		],
+		"ruin": [
+			"..............",
+			".....#...#....",
+			"..............",
+			"......#..#....",
+			"......#..#....",
+			"..............",
+			".....#...#....",
+			".............."
+		],
+		"forest": [
+			"....\"..\"..\"...",
+			"......\"\"...\"..",
+			"....\"....\"....",
+			".......\"......",
+			"....\"\"....\"\"..",
+			"........\".....",
+			"....\"..\"\".....",
+			"......\"....\".."
+		],
+		"river": [
+			".......~~.....",
+			".......~~.....",
+			"..............",
+			".......~~.....",
+			".......~~.....",
+			"..............",
+			".......~~.....",
+			".......~~....."
+		],
+		"narrow": [
+			"......##......",
+			"......##......",
+			"..............",
+			"......##......",
+			"......##......",
+			"..............",
+			"......##......",
+			"......##......"
+		]
+	}
+}

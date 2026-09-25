@@ -1,0 +1,9 @@
+NotoSansJP-sub.ttf（元: NotoSansJP-VF.ttf）
+  © 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+  This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software.
+  http://scripts.sil.org/OFL
+NotoSerifJP-sub.ttf（元: NotoSerifJP-VF.ttf）
+  © 2017-2023 Adobe (http://www.adobe.com/).
+  This Font Software is licensed under the SIL Open Font License, Version 1.1. This Font Software is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the SIL Open Font License for the specific language, permissions and limitations governing your use of this Font Software.
+  http://scripts.sil.org/OFL
+このフォルダのフォントは、ゲームで使う文字だけに絞った部分集合です（game_v2/tools/web_fonts.py）。

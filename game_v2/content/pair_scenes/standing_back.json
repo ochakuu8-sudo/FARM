@@ -1,0 +1,103 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "立ちバック。女は立ったまま腰を折って両手を膝につき、尻を突き出す。ゴブリンが後ろに立って両手で女の腰をつかみ、腰を前後に打ちつける。打ちつけるたびに女の体が前へ揺れ、胸と尻が揺れる。男性器は付属物（groin、aim で女の腰へ向け、insert_keys で入った分を隠す）。位相0が最も奥。",
+	"version": 1,
+	"duration": 0.9,
+	"check": {"measure": "goblin.pelvis:taker.pelvis", "phases": [0, 0.5], "view": 1},
+	"clips": {
+		"bent": {
+			"duration": 0.9,
+			"base": "stand",
+			"poses": {
+				"in": {
+					"hip": [0, 1.95, 0.05],
+					"lean": 72,
+					"pelvis_pitch": 48,
+					"head_pitch": -48,
+					"foot_l": [0.38, 0.2, 0.05],
+					"foot_r": [-0.38, 0.2, 0.05],
+					"hand_l": [0.3, 1.12, 0.74],
+					"hand_r": [-0.3, 1.12, 0.74],
+					"pole_arm_l": [1, 0.3, -1],
+					"pole_arm_r": [-1, 0.3, -1]
+				},
+				"out": {
+					"hip": [0, 1.95, -0.02],
+					"lean": 76,
+					"pelvis_pitch": 50,
+					"head_pitch": -40,
+					"foot_l": [0.38, 0.2, 0.05],
+					"foot_r": [-0.38, 0.2, 0.05],
+					"hand_l": [0.3, 1.12, 0.74],
+					"hand_r": [-0.3, 1.12, 0.74],
+					"pole_arm_l": [1, 0.3, -1],
+					"pole_arm_r": [-1, 0.3, -1]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "out"},
+				{"t": 0.5, "pose": "out", "ease": "in"},
+				{"t": 1, "pose": "in"}
+			]
+		},
+		"thrust": {
+			"duration": 0.9,
+			"base": "stand",
+			"poses": {
+				"in": {"hip": [0, 2.0, 0.1], "lean": -4, "head_pitch": 14, "foot_l": [0.3, 0.2, -0.05], "foot_r": [-0.3, 0.2, -0.05], "pole_arm_l": [1, -0.2, -0.6], "pole_arm_r": [-1, -0.2, -0.6]},
+				"out": {"hip": [0, 2.0, -0.08], "lean": 6, "head_pitch": 10, "foot_l": [0.3, 0.2, -0.05], "foot_r": [-0.3, 0.2, -0.05], "pole_arm_l": [1, -0.2, -0.6], "pole_arm_r": [-1, -0.2, -0.6]}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "out"},
+				{"t": 0.5, "pose": "out", "ease": "in"},
+				{"t": 1, "pose": "in"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "bent",
+			"outfit": "nude",
+			"secondary": {
+				"chest": {"lag": 0.1, "damping": 0.55, "amount": 1, "max_offset": 0.05},
+				"head": {"lag": 0.06, "damping": 0.7, "amount": 0.5, "max_offset": 0.02}
+			},
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "blink"}},
+				{"t": 0.3, "face": {"preset": "neutral"}},
+				{"t": 0.85, "face": {"preset": "blink"}}
+			]
+		},
+		{
+			"id": "goblin",
+			"character": 1,
+			"root": [-0.23, 0, 0],
+			"yaw": 90,
+			"clip": "thrust",
+			"props": {"groin": "erect"},
+			"aim": {
+				"slot": "groin",
+				"leader": "taker",
+				"leader_socket": "part:pelvis",
+				"offset": [0, -0.06, -0.06],
+				"insert_keys": [{"t": 0, "insert": 0.35}, {"t": 0.5, "insert": 0.9}, {"t": 1, "insert": 0.35}]
+			}
+		}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{"leader_socket": "part:pelvis", "follower_goal": "hand_l", "follower_socket": "part:hand_l", "offset_space": "leader_local", "offset": [0.2, 0.04, 0.0]},
+				{"leader_socket": "part:pelvis", "follower_goal": "hand_r", "follower_socket": "part:hand_r", "offset_space": "leader_local", "offset": [-0.2, 0.04, 0.0]}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

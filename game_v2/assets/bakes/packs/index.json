@@ -1,0 +1,243 @@
+{
+	"built": "2026-09-26T00:58:09",
+	"clips": {
+		"0": "clips_0.pack",
+		"1": "clips_1.pack"
+	},
+	"pairs": {
+		"0|": {
+			"barrel": {
+				"file": "pair_barrel__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"birth_egg": {
+				"file": "pair_birth_egg__0__.pack",
+				"stages": [
+					"default",
+					"lay",
+					"after"
+				]
+			},
+			"bridge": {
+				"file": "pair_bridge__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"cattle": {
+				"file": "pair_cattle__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"crucifix": {
+				"file": "pair_crucifix__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"dog_bowl": {
+				"file": "pair_dog_bowl__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"dog_trick": {
+				"file": "pair_dog_trick__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"dogeza": {
+				"file": "pair_dogeza__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"hang": {
+				"file": "pair_hang__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"hip_dance": {
+				"file": "pair_hip_dance__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"pillory": {
+				"file": "pair_pillory__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"rope_walk": {
+				"file": "pair_rope_walk__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"sign_board": {
+				"file": "pair_sign_board__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"sonkyo": {
+				"file": "pair_sonkyo__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"trash_can": {
+				"file": "pair_trash_can__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"wall_butt": {
+				"file": "pair_wall_butt__0__.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"wooden_horse": {
+				"file": "pair_wooden_horse__0__.pack",
+				"stages": [
+					"default"
+				]
+			}
+		},
+		"0|1": {
+			"bind_ground": {
+				"file": "pair_bind_ground__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"carry_shoulder": {
+				"file": "pair_carry_shoulder__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"dog_walk": {
+				"file": "pair_dog_walk__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"face_sit": {
+				"file": "pair_face_sit__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"fellatio": {
+				"file": "pair_fellatio__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"floor_wipe": {
+				"file": "pair_floor_wipe__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"foot_kiss": {
+				"file": "pair_foot_kiss__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"full_nelson": {
+				"file": "pair_full_nelson__0__1.pack",
+				"stages": [
+					"default",
+					"strong",
+					"climax",
+					"after"
+				]
+			},
+			"greeting": {
+				"file": "pair_greeting__0__1.pack",
+				"stages": [
+					"default",
+					"brisk"
+				]
+			},
+			"grope_knead": {
+				"file": "pair_grope_knead__0__1.pack",
+				"stages": [
+					"default",
+					"strong"
+				]
+			},
+			"mangurigaeshi": {
+				"file": "pair_mangurigaeshi__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"mating_press": {
+				"file": "pair_mating_press__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"milking": {
+				"file": "pair_milking__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"pony_ride": {
+				"file": "pair_pony_ride__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"restrain_grope": {
+				"file": "pair_restrain_grope__0__1.pack",
+				"stages": [
+					"default",
+					"strong"
+				]
+			},
+			"spanking": {
+				"file": "pair_spanking__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"standing_back": {
+				"file": "pair_standing_back__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"stepped": {
+				"file": "pair_stepped__0__1.pack",
+				"stages": [
+					"default"
+				]
+			},
+			"supine_knees": {
+				"file": "pair_supine_knees__0__1.pack",
+				"stages": [
+					"default",
+					"strong"
+				]
+			}
+		}
+	},
+	"recipes": "recipes.pack",
+	"sources": {
+		"res://game_v2/assets/bakes/pc.bin": 1790308720
+	},
+	"version": 2
+}

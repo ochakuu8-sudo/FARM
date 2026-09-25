@@ -1,0 +1,418 @@
+{
+	"actions": {
+		"idle": {
+			"clip": "idle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"walk": {
+			"clip": "walk",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"run": {
+			"clip": "run",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"attack": {
+			"clip": "attack",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"attack_heavy": {
+			"clip": "attack",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"cast": {
+			"clip": "weak_attack",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"hit": {
+			"clip": "hit",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"defeated": {
+			"clip": "defeated",
+			"mode": "hold",
+			"speed": 1.0
+		},
+		"down": {
+			"clip": "defeated",
+			"mode": "hold",
+			"speed": 1.0
+		},
+		"down_struggle": {
+			"clip": "struggle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"rise": {
+			"clip": "rise",
+			"mode": "once",
+			"speed": 1.0
+		},
+		"bound": {
+			"clip": "bound",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"flee": {
+			"clip": "run",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"heal": {
+			"clip": "inspect",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"unbind": {
+			"clip": "disarm",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"caged": {
+			"clip": "caged_sit",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"work_dig": {
+			"clip": "disarm",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"work_craft": {
+			"clip": "inspect",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"work_cook": {
+			"clip": "inspect",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"work_study": {
+			"clip": "inspect",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"guard": {
+			"clip": "idle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"rest": {
+			"clip": "rest_lie",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"pregnant_idle": {
+			"clip": "idle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"kneel": {
+			"clip": "kneel_idle",
+			"mode": "loop",
+			"speed": 1.0
+		},
+		"serve": {
+			"clip": "serve_bow",
+			"mode": "loop",
+			"speed": 1.0
+		}
+	},
+	"events": [
+		{
+			"event_kind": "ranch.room",
+			"room": "pleasure",
+			"pair_scene_id": "grope_knead",
+			"stage": "default",
+			"symbol": "快楽責め"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "bondage",
+			"pair_scene_id": "restrain_grope",
+			"stage": "default",
+			"symbol": "晒し"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "service",
+			"pair_scene_id": "fellatio",
+			"stage": "default",
+			"symbol": "奉仕"
+		},
+		{
+			"event_kind": "ranch.lay",
+			"room": "nursery",
+			"pair_scene_id": "full_nelson",
+			"stage": "@sequence",
+			"symbol": "種付け"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "incubus_den",
+			"pair_scene_id": "full_nelson",
+			"stage": "default",
+			"symbol": "洗脳"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "torment",
+			"pair_scene_id": "spanking",
+			"stage": "default",
+			"symbol": "仕置き"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "sweet",
+			"pair_scene_id": "greeting",
+			"stage": "default",
+			"symbol": "甘やかし"
+		},
+		{
+			"event_kind": "ranch.press",
+			"room": "milking",
+			"pair_scene_id": "milking",
+			"stage": "default",
+			"symbol": "搾乳"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "trash",
+			"pair_scene_id": "trash_can",
+			"stage": "default",
+			"symbol": "ゴミ箱"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "cage",
+			"pair_scene_id": "carry_shoulder",
+			"stage": "default",
+			"symbol": "群れ"
+		},
+		{
+			"event_kind": "ranch.press",
+			"room": "wall",
+			"pair_scene_id": "wall_butt",
+			"stage": "default",
+			"symbol": "壁尻"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "post",
+			"pair_scene_id": "standing_back",
+			"stage": "default",
+			"symbol": "立ちバック"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "table",
+			"pair_scene_id": "mangurigaeshi",
+			"stage": "default",
+			"symbol": "まんぐり返し"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "horse",
+			"pair_scene_id": "wooden_horse",
+			"stage": "default",
+			"symbol": "三角木馬"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "mat",
+			"pair_scene_id": "dogeza",
+			"stage": "default",
+			"symbol": "土下座"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "stand",
+			"pair_scene_id": "sonkyo",
+			"stage": "default",
+			"symbol": "蹲踞"
+		},
+		{
+			"event_kind": "ranch.lay",
+			"room": "nursery",
+			"phase": "fallen",
+			"pair_scene_id": "mating_press",
+			"stage": "default",
+			"symbol": "種付けプレス"
+		},
+		{
+			"event_kind": "ranch.lay",
+			"room": "nursery",
+			"phase": "deep",
+			"pair_scene_id": "mating_press",
+			"stage": "default",
+			"symbol": "種付けプレス"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "face_sit",
+			"pair_scene_id": "face_sit",
+			"stage": "default",
+			"symbol": "人間椅子"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "dog_walk",
+			"pair_scene_id": "dog_walk",
+			"stage": "default",
+			"symbol": "散歩"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "dog_trick",
+			"pair_scene_id": "dog_trick",
+			"stage": "default",
+			"symbol": "犬芸"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "dog_bowl",
+			"pair_scene_id": "dog_bowl",
+			"stage": "default",
+			"symbol": "餌皿"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "pony_ride",
+			"pair_scene_id": "pony_ride",
+			"stage": "default",
+			"symbol": "お馬さん"
+		},
+		{
+			"event_kind": "ranch.press",
+			"room": "cattle",
+			"pair_scene_id": "cattle",
+			"stage": "default",
+			"symbol": "牛舎"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "pillory",
+			"pair_scene_id": "pillory",
+			"stage": "default",
+			"symbol": "首枷"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "crucifix",
+			"pair_scene_id": "crucifix",
+			"stage": "default",
+			"symbol": "磔"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "hang",
+			"pair_scene_id": "hang",
+			"stage": "default",
+			"symbol": "逆さ吊り"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "sign_board",
+			"pair_scene_id": "sign_board",
+			"stage": "default",
+			"symbol": "晒し札"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "stepped",
+			"pair_scene_id": "stepped",
+			"stage": "default",
+			"symbol": "踏みつけ"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "foot_kiss",
+			"pair_scene_id": "foot_kiss",
+			"stage": "default",
+			"symbol": "足への口づけ"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "floor_wipe",
+			"pair_scene_id": "floor_wipe",
+			"stage": "default",
+			"symbol": "雑巾がけ"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "bridge",
+			"pair_scene_id": "bridge",
+			"stage": "default",
+			"symbol": "ブリッジ"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "hip_dance",
+			"pair_scene_id": "hip_dance",
+			"stage": "default",
+			"symbol": "腰振り"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "barrel",
+			"pair_scene_id": "barrel",
+			"stage": "default",
+			"symbol": "樽詰め"
+		},
+		{
+			"event_kind": "ranch.room",
+			"room": "rope_walk",
+			"pair_scene_id": "rope_walk",
+			"stage": "default",
+			"symbol": "股縄渡り"
+		},
+		{
+			"event_kind": "ranch.milestone",
+			"pair_scene_id": "full_nelson",
+			"stage": "@sequence",
+			"symbol": "節目"
+		},
+		{
+			"event_kind": "ranch.ending",
+			"pair_scene_id": "full_nelson",
+			"stage": "@sequence",
+			"symbol": "結末"
+		},
+		{
+			"event_kind": "ranch.altar",
+			"pair_scene_id": "birth_egg",
+			"stage": "@sequence",
+			"symbol": "召喚の儀式"
+		},
+		{
+			"event_kind": "battle.capture",
+			"pair_scene_id": "bind_ground",
+			"stage": "default",
+			"symbol": "縛る"
+		}
+	],
+	"profiles": {
+		"0": {},
+		"1": {
+			"attack": {
+				"clip": "claw_attack",
+				"mode": "once",
+				"speed": 1.0
+			},
+			"attack_heavy": {
+				"clip": "claw_attack",
+				"mode": "once",
+				"speed": 1.0
+			}
+		}
+	},
+	"version": 1
+}

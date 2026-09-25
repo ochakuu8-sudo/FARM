@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "parts": {
+    "upper_arm": {"proximal": [0.5, 0.12], "distal": [0.5, 0.88], "strength": 0.8, "mode": 1},
+    "forearm": {"proximal": [0.5, 0.12], "distal": [0.5, 0.88], "strength": 0.8, "mode": 1},
+    "hand": {"proximal": [0.5, 0.08], "distal": [0.5, 0.92], "strength": 1.0, "mode": 2},
+    "thigh": {"proximal": [0.5, 0.16], "distal": [0.5, 0.86], "strength": 0.8, "mode": 1},
+    "shin": {"proximal": [0.5, 0.12], "distal": [0.5, 0.88], "strength": 0.8, "mode": 1},
+    "pelvis": {"proximal": [0.5, 0.0], "distal": [0.5, 1.0], "strength": 0.06, "mode": 3}
+  }
+}

@@ -1,0 +1,122 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "まんぐり返し。女は肩と後頭部を床につけ、腰を真上まで持ち上げられて、脚を頭の方へ折り返される。ゴブリンが女の頭の側に膝をつき、両手で女の足首をつかんで脚を大きく開かせ、頭の横へ押しつける。尻は上と足の側を向いて晒される。押しつけるたびに女の腰がわずかに沈む。",
+	"version": 1,
+	"duration": 1.6,
+	"check": {"measure": "goblin.wrist_l:taker.ankle_r", "phases": [0, 0.5], "view": 0},
+	"clips": {
+		"rolled": {
+			"duration": 1.6,
+			"base": "lie_back",
+			"poses": {
+				"up": {
+					"hip": [0, 1.45, 0],
+					"lean": -160,
+					"pelvis_pitch": -165,
+					"head_pitch": 55,
+					"spine_pitch": 20,
+					"foot_l": [0.58, 1.05, -1.2],
+					"foot_r": [-0.58, 1.05, -1.2],
+					"pole_leg_l": [1, 0.2, -0.6],
+					"pole_leg_r": [-1, 0.2, -0.6],
+					"hand_l": [0.55, 0.5, -0.35],
+					"hand_r": [-0.55, 0.5, -0.35],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"pressed": {
+					"hip": [0, 1.38, -0.04],
+					"lean": -166,
+					"pelvis_pitch": -170,
+					"head_pitch": 60,
+					"spine_pitch": 24,
+					"foot_l": [0.58, 0.99, -1.28],
+					"foot_r": [-0.58, 0.99, -1.28],
+					"pole_leg_l": [1, 0.2, -0.6],
+					"pole_leg_r": [-1, 0.2, -0.6],
+					"hand_l": [0.55, 0.5, -0.35],
+					"hand_r": [-0.55, 0.5, -0.35],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "up", "ease": "soft"},
+				{"t": 0.5, "pose": "pressed", "ease": "soft"},
+				{"t": 1, "pose": "up"}
+			]
+		},
+		"hold": {
+			"duration": 1.6,
+			"base": "kneel",
+			"poses": {
+				"a": {
+					"hip": [0, 1.0, 0.05],
+					"lean": 30,
+					"head_pitch": 25,
+					"pole_arm_l": [1, -0.2, -0.4],
+					"pole_arm_r": [-1, -0.2, -0.4]
+				},
+				"b": {
+					"hip": [0, 1.0, 0.12],
+					"lean": 38,
+					"head_pitch": 28,
+					"pole_arm_l": [1, -0.2, -0.4],
+					"pole_arm_r": [-1, -0.2, -0.4]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "rolled",
+			"outfit": "nude",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.45,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.7,
+					"face": {"preset": "neutral"}
+				}
+			]
+		},
+		{"id": "goblin", "character": 1, "root": [-1.0, 0, 0], "yaw": 90, "clip": "hold"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "joint:ankle_l",
+					"follower_goal": "hand_l",
+					"follower_socket": "joint:wrist_l",
+					"offset": [0, 0.04, 0]
+				},
+				{
+					"leader_socket": "joint:ankle_r",
+					"follower_goal": "hand_r",
+					"follower_socket": "joint:wrist_r",
+					"offset": [0, 0.04, 0]
+				}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

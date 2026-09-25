@@ -1,0 +1,88 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "三角木馬。1体だけの場面。女は後ろ手に縛られて三角木馬（blocks の prism）にまたがり、足は床に届かずぶら下がる。体をよじり、脚をばたつかせ、顔を上げ下げして耐える。木馬は体の部位の間に挟んで描くので、見ている側の脚だけが木馬の前に出る。斜め45°で真横に見える向き（yaw 135）。",
+	"version": 1,
+	"duration": 2.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"ride": {
+			"duration": 2.4,
+			"base": "stand",
+			"poses": {
+				"sit": {
+					"hip": [0, 1.86, 0],
+					"lean": 4,
+					"head_pitch": 8,
+					"foot_l": [0.5, 0.5, 0.05],
+					"foot_r": [-0.5, 0.5, 0.05],
+					"pole_leg_l": [0.6, 0, 1],
+					"pole_leg_r": [-0.6, 0, 1],
+					"hand_l": [0.1, 1.9, -0.38],
+					"hand_r": [-0.1, 1.9, -0.38],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				},
+				"writhe_l": {
+					"hip": [0.05, 1.88, 0],
+					"lean": -4,
+					"twist": 7,
+					"pelvis_roll": 5,
+					"head_pitch": -16,
+					"foot_l": [0.52, 0.72, 0.12],
+					"foot_r": [-0.48, 0.44, -0.02],
+					"pole_leg_l": [0.6, 0, 1],
+					"pole_leg_r": [-0.6, 0, 1],
+					"hand_l": [0.1, 1.9, -0.38],
+					"hand_r": [-0.1, 1.9, -0.38],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				},
+				"writhe_r": {
+					"hip": [-0.05, 1.88, 0],
+					"lean": 10,
+					"twist": -7,
+					"pelvis_roll": -5,
+					"head_pitch": 22,
+					"foot_l": [0.48, 0.44, -0.02],
+					"foot_r": [-0.52, 0.72, 0.12],
+					"pole_leg_l": [0.6, 0, 1],
+					"pole_leg_r": [-0.6, 0, 1],
+					"hand_l": [0.1, 1.9, -0.38],
+					"hand_r": [-0.1, 1.9, -0.38],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "sit"},
+				{"t": 0.25, "pose": "writhe_l", "ease": "soft"},
+				{"t": 0.5, "pose": "sit"},
+				{"t": 0.75, "pose": "writhe_r", "ease": "soft"},
+				{"t": 1, "pose": "sit"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 135,
+			"clip": "ride",
+			"outfit": "nude",
+			"secondary": {"chest": {"lag": 0.1, "damping": 0.6, "amount": 1, "max_offset": 0.04}},
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "neutral"}},
+				{"t": 0.22, "face": {"preset": "blink"}},
+				{"t": 0.4, "face": {"preset": "neutral"}},
+				{"t": 0.72, "face": {"preset": "blink"}},
+				{"t": 0.9, "face": {"preset": "neutral"}}
+			]
+		}
+	],
+	"constraints": [],
+	"blocks": [
+		{"actor": "taker", "shape": "prism", "offset": [0, 0, 0], "yaw": 0, "size": [1.1, 0.26, 0.74], "tri": 0.3, "color": "#6b4a2e", "depth_bias": -0.05}
+	],
+	"effects": []
+}

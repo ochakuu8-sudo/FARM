@@ -1,0 +1,144 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "戦闘で捕虜を担いで運ぶ（非性的）。魔物が縛った女を左肩に担ぎ、その場で歩く。移動はゲームが行い、場面は運び役の足もとに付いて動く（Bridge.follow_pair）。yaw 90 で横向き。女の腰を魔物の肩に乗せ、上半身は背中側へ垂らし、脚は前へ下ろす。女の腰の上下は魔物の歩きの上下に合わせる。",
+	"version": 1,
+	"duration": 0.88,
+	"check": {
+		"measure": "carrier.shoulder_l:taker.pelvis,carrier.wrist_l:taker.knee_r",
+		"phases": [0, 0.25, 0.5],
+		"view": 0,
+		"fit": {
+			"params": [
+				{"path": "clips.slung.poses.low.hip", "axes": [1, 2], "step": 0.08, "range": 0.8},
+				{"path": "clips.slung.poses.high.hip", "axes": [1, 2], "step": 0.08, "range": 0.8}
+			],
+			"goals": [
+				{"measure": "carrier.shoulder_l:taker.pelvis", "max": 0.16, "weight": 2},
+				{"measure": "carrier.part:head:taker.part:head", "min": 0.3}
+			],
+			"phases": [0, 0.25],
+			"iterations": 10
+		}
+	},
+	"clips": {
+		"slung": {
+			"duration": 0.88,
+			"base": "stand",
+			"poses": {
+				"low": {
+					"hip": [0, 3.62, 0],
+					"lean": 118,
+					"spine_pitch": 20,
+					"head_pitch": 40,
+					"head_yaw": 10,
+					"hand_l": [0.32, 2.05, 1.32],
+					"hand_r": [-0.32, 2.05, 1.28],
+					"pole_arm_l": [1, 0, 0.3],
+					"pole_arm_r": [-1, 0, 0.3],
+					"foot_l": [0.22, 2.3, -0.75],
+					"foot_r": [-0.2, 2.4, -0.62],
+					"pole_leg_l": [0, -0.4, -1],
+					"pole_leg_r": [0, -0.4, -1],
+					"support": "feet"
+				},
+				"high": {
+					"hip": [0, 3.74, 0],
+					"lean": 122,
+					"spine_pitch": 24,
+					"head_pitch": 44,
+					"head_yaw": -6,
+					"hand_l": [0.32, 2.05, 1.32],
+					"hand_r": [-0.32, 2.05, 1.28],
+					"pole_arm_l": [1, 0, 0.3],
+					"pole_arm_r": [-1, 0, 0.3],
+					"foot_l": [0.22, 2.36, -0.7],
+					"foot_r": [-0.2, 2.46, -0.58],
+					"pole_leg_l": [0, -0.4, -1],
+					"pole_leg_r": [0, -0.4, -1],
+					"support": "feet"
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "low"},
+				{"t": 0.25, "pose": "high"},
+				{"t": 0.5, "pose": "low"},
+				{"t": 0.75, "pose": "high"},
+				{"t": 1, "pose": "low"}
+			]
+		},
+		"carry_walk": {
+			"duration": 0.88,
+			"base": "stand",
+			"poses": {
+				"left": {
+					"hip": [0.05, 1.86, 0.02],
+					"lean": 12,
+					"twist": -6,
+					"foot_l": [0.27, 0.2, 0.48],
+					"foot_r": [-0.27, 0.26, -0.44],
+					"hand_l": [0.26, 3.25, 0.3],
+					"hand_r": [-0.62, 2.22, 0.5],
+					"pole_arm_l": [1, -0.5, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"pass_r": {
+					"hip": [0.06, 1.99, 0.06],
+					"lean": 12,
+					"foot_l": [0.27, 0.2, 0.0],
+					"foot_r": [-0.27, 0.64, 0.12],
+					"hand_l": [0.26, 3.33, 0.3],
+					"hand_r": [-0.66, 2.04, 0.0],
+					"pole_arm_l": [1, -0.5, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"right": {
+					"hip": [-0.05, 1.86, 0.02],
+					"lean": 12,
+					"twist": 6,
+					"foot_l": [0.27, 0.26, -0.44],
+					"foot_r": [-0.27, 0.2, 0.48],
+					"hand_l": [0.26, 3.25, 0.3],
+					"hand_r": [-0.62, 2.08, -0.46],
+					"pole_arm_l": [1, -0.5, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"pass_l": {
+					"hip": [-0.06, 1.99, 0.06],
+					"lean": 12,
+					"foot_l": [0.27, 0.64, 0.12],
+					"foot_r": [-0.27, 0.2, 0.0],
+					"hand_l": [0.26, 3.33, 0.3],
+					"hand_r": [-0.66, 2.04, 0.0],
+					"pole_arm_l": [1, -0.5, 0],
+					"pole_arm_r": [-1, 0, 0]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "left"},
+				{"t": 0.25, "pose": "pass_r"},
+				{"t": 0.5, "pose": "right"},
+				{"t": 0.75, "pose": "pass_l"},
+				{"t": 1, "pose": "left"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, -0.14],
+			"yaw": 270,
+			"clip": "slung",
+			"face": {"preset": "blink", "baked": "closed"},
+			"secondary": {
+				"head": {"lag": 0.12, "damping": 0.5, "amount": 1, "max_offset": 0.05}
+			}
+		},
+		{"id": "carrier", "character": 1, "root": [0, 0, 0], "yaw": 90, "clip": "carry_walk"}
+	],
+	"constraints": [],
+	"transition_markers": {"cycle_start": 0},
+	"by_body": {
+		"0": {"clips.slung.poses.high.hip": [0.0, 3.5, -0.38], "clips.slung.poses.low.hip": [0.0, 3.36, -0.44]}
+	}
+}

@@ -1,0 +1,88 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "壁尻。1体だけの場面。女は腰を折って上半身を壁の穴に通され、壁の向こうで両手を縛られている。こちら側には尻と脚だけが出て、爪先立ちになったり脚をもぞもぞさせたりしながら尻を左右に振る。壁は walls（石積みの箱）で描き、見ている側から壁の向こうにある部位は描かない（尻の側から見れば尻と脚だけ、反対側から見れば上半身だけ）。衣装 nude（尻を出す差分）は作者の素材が入ると効く。",
+	"version": 1,
+	"duration": 2.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 0},
+	"clips": {
+		"stuck": {
+			"duration": 2.4,
+			"base": "stand",
+			"poses": {
+				"rest": {
+					"hip": [0, 2.0, 0],
+					"lean": 88,
+					"pelvis_pitch": 70,
+					"head_pitch": -62,
+					"foot_l": [0.42, 0.2, -0.12],
+					"foot_r": [-0.42, 0.2, -0.12],
+					"pole_leg_l": [0.3, 0, 1],
+					"pole_leg_r": [-0.3, 0, 1],
+					"hand_l": [0.12, 1.55, 1.75],
+					"hand_r": [-0.12, 1.55, 1.75],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"sway_l": {
+					"hip": [0.08, 2.05, 0],
+					"lean": 88,
+					"pelvis_pitch": 70,
+					"pelvis_roll": 6,
+					"head_pitch": -58,
+					"foot_l": [0.42, 0.42, -0.2],
+					"foot_r": [-0.42, 0.2, -0.12],
+					"pole_leg_l": [0.3, 0, 1],
+					"pole_leg_r": [-0.3, 0, 1],
+					"hand_l": [0.12, 1.55, 1.75],
+					"hand_r": [-0.12, 1.55, 1.75],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				},
+				"sway_r": {
+					"hip": [-0.08, 2.05, 0],
+					"lean": 88,
+					"pelvis_pitch": 70,
+					"pelvis_roll": -6,
+					"head_pitch": -66,
+					"foot_l": [0.42, 0.2, -0.12],
+					"foot_r": [-0.42, 0.42, -0.2],
+					"pole_leg_l": [0.3, 0, 1],
+					"pole_leg_r": [-0.3, 0, 1],
+					"hand_l": [0.12, 1.55, 1.75],
+					"hand_r": [-0.12, 1.55, 1.75],
+					"pole_arm_l": [1, 0, 0],
+					"pole_arm_r": [-1, 0, 0]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "rest"},
+				{"t": 0.25, "pose": "sway_l", "ease": "soft"},
+				{"t": 0.5, "pose": "rest"},
+				{"t": 0.75, "pose": "sway_r", "ease": "soft"},
+				{"t": 1, "pose": "rest"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 180,
+			"clip": "stuck",
+			"outfit": "nude",
+			"face_keys": [
+				{"t": 0.0, "face": {"preset": "neutral"}},
+				{"t": 0.3, "face": {"preset": "blink"}},
+				{"t": 0.36, "face": {"preset": "neutral"}},
+				{"t": 0.8, "face": {"preset": "blink"}},
+				{"t": 0.86, "face": {"preset": "neutral"}}
+			]
+		}
+	],
+	"constraints": [],
+	"walls": [
+		{"actor": "taker", "offset": [0, 0, 0.1], "normal": [0, 0, -1], "width": 1.7, "height": 1.35, "thick": 0.14, "hole": [0.84, 0.2], "color": "#4a3f3c"}
+	],
+	"effects": []
+}

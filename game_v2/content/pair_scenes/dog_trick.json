@@ -1,0 +1,88 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "犬芸（ちんちん）。爪先立ちでしゃがんで膝を開き、両手を胸の前で丸めて前足にする。首をかしげながら、芸をせがむように体を上下させる。斜め45°で正面（yaw 45）。",
+	"version": 1,
+	"duration": 1.2,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 1.2,
+			"base": "squat",
+			"poses": {
+				"a": {
+					"hip": [0, 1.1, -0.12],
+					"lean": 2,
+					"head_pitch": -8,
+					"head_yaw": 10,
+					"foot_l": [0.5, 0.34, 0.08],
+					"foot_r": [-0.5, 0.34, 0.08],
+					"pole_leg_l": [1, 0, 0.45],
+					"pole_leg_r": [-1, 0, 0.45],
+					"hand_l": [0.13, 1.72, 0.4],
+					"hand_r": [-0.13, 1.72, 0.4],
+					"pole_arm_l": [1, -0.4, 0.2],
+					"pole_arm_r": [-1, -0.4, 0.2],
+					"wrist_l": [70, 0, 0],
+					"wrist_r": [70, 0, 0]
+				},
+				"b": {
+					"hip": [0, 1.2, -0.1],
+					"lean": 2,
+					"head_pitch": -14,
+					"head_yaw": -10,
+					"foot_l": [0.5, 0.34, 0.08],
+					"foot_r": [-0.5, 0.34, 0.08],
+					"pole_leg_l": [1, 0, 0.45],
+					"pole_leg_r": [-1, 0, 0.45],
+					"hand_l": [0.13, 1.72, 0.4],
+					"hand_r": [-0.13, 1.72, 0.4],
+					"pole_arm_l": [1, -0.4, 0.2],
+					"pole_arm_r": [-1, -0.4, 0.2],
+					"wrist_l": [70, 0, 0],
+					"wrist_r": [70, 0, 0]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 45,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude",
+			"secondary": {
+				"chest": {"lag": 0.12, "damping": 0.55, "amount": 1, "max_offset": 0.04}
+			}
+		}
+	],
+	"constraints": []
+}

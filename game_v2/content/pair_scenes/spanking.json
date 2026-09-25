@@ -1,0 +1,136 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "スパンキング。女は立ったまま腰を折り、両手を膝について尻を突き出す。ゴブリンが斜め後ろに立ち、左手で女の腰を押さえ、右手を振り上げて尻を叩く（位相0.45で当たる）。当たった瞬間に尻が揺れ（press）、衝撃の印（effects の slap）が出て、女はびくっと前へ跳ねて顔を上げ、目をつぶる。衣装 nude（尻を出す差分）は作者の素材が入ると効く。",
+	"version": 1,
+	"duration": 1.4,
+	"check": {"phases": [0, 0.45, 0.55, 0.75], "view": 0},
+	"clips": {
+		"bent": {
+			"duration": 1.4,
+			"base": "stand",
+			"poses": {
+				"rest": {
+					"hip": [0, 1.95, 0],
+					"lean": 76,
+					"pelvis_pitch": 50,
+					"head_pitch": -50,
+					"foot_l": [0.34, 0.2, 0.05],
+					"foot_r": [-0.34, 0.2, 0.05],
+					"hand_l": [0.3, 1.1, 0.72],
+					"hand_r": [-0.3, 1.1, 0.72],
+					"pole_arm_l": [1, 0.3, -1],
+					"pole_arm_r": [-1, 0.3, -1]
+				},
+				"jolt": {
+					"hip": [0, 1.99, 0.05],
+					"lean": 68,
+					"pelvis_pitch": 44,
+					"head_pitch": -68,
+					"foot_l": [0.34, 0.2, 0.05],
+					"foot_r": [-0.34, 0.2, 0.05],
+					"hand_l": [0.3, 1.1, 0.72],
+					"hand_r": [-0.3, 1.1, 0.72],
+					"pole_arm_l": [1, 0.3, -1],
+					"pole_arm_r": [-1, 0.3, -1]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "rest"},
+				{"t": 0.45, "pose": "rest", "ease": "out"},
+				{"t": 0.55, "pose": "jolt", "ease": "soft"},
+				{"t": 0.87, "pose": "rest"},
+				{"t": 1, "pose": "rest"}
+			]
+		},
+		"swing": {
+			"duration": 1.4,
+			"base": "stand",
+			"poses": {
+				"s": {
+					"lean": 22,
+					"twist": 0,
+					"head_pitch": 10,
+					"pole_arm_l": [1, -0.3, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.6]
+				}
+			},
+			"keys": [{"t": 0, "pose": "s"}, {"t": 1, "pose": "s"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "bent",
+			"outfit": "nude",
+			"press": {"from": "goblin", "parts": ["hand_r"], "radius": 0.14, "strength": 1.4, "max": 0.06},
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.45,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.72,
+					"face": {"preset": "neutral"}
+				}
+			]
+		},
+		{"id": "goblin", "character": 1, "root": [-0.48, 0, -0.27], "yaw": 45, "clip": "swing"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:abdomen",
+					"follower_goal": "hand_l",
+					"follower_socket": "part:hand_l",
+					"offset_space": "leader_local",
+					"offset": [0.0, 0.14, 0.0]
+				},
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_keys": [
+						{"t": 0, "offset": [-0.5, 0.96, 0.02]},
+						{"t": 0.18, "offset": [-0.54, 1.0, 0.0], "ease": "in"},
+						{"t": 0.3, "offset": [-0.47, 0.82, 0.05], "ease": "linear"},
+						{"t": 0.39, "offset": [-0.32, 0.52, 0.09], "ease": "linear"},
+						{"t": 0.45, "offset": [-0.1, 0.14, 0.1]},
+						{"t": 0.53, "offset": [-0.14, 0.2, 0.12], "ease": "soft"},
+						{"t": 1, "offset": [-0.5, 0.96, 0.02]}
+					]
+				},
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "elbow_r",
+					"offset": [-0.62, 0.66, 0.32],
+					"tolerance": 0.3
+				}
+			]
+		}
+	],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "pelvis",
+			"image": "slap",
+			"offset": [-0.1, 0.0, -0.2],
+			"from": 0.45,
+			"to": 0.63,
+			"fade": 0.04,
+			"scale": 0.6,
+			"pulse": 0.25
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

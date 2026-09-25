@@ -1,0 +1,936 @@
+{
+	"atlas_path": "res://mini/projected2d/b_cutout/atlas.png",
+	"display_name": "冒険者（5方向）",
+	"display_scale": 1.6,
+	"face": {
+		"atlas_path": "res://mini/projected2d/b_cutout/expressions/simple_face/adventurer/atlas.png",
+		"blank_row": 0.0,
+		"mix_mask_row": 3.0,
+		"registered": {
+			"max_cache_entries": 8.0,
+			"mix": "snap",
+			"presets": {
+				"neutral": {
+					"brow_l": "original",
+					"brow_r": "original",
+					"eye_l": "open",
+					"eye_r": "open",
+					"mouth": "small"
+				},
+				"blink": {
+					"brow_l": "original",
+					"brow_r": "original",
+					"eye_l": "closed",
+					"eye_r": "closed",
+					"mouth": "small"
+				},
+				"wink": {
+					"brow_l": "original",
+					"brow_r": "original",
+					"eye_l": "open",
+					"eye_r": "closed",
+					"mouth": "small"
+				}
+			},
+			"registration": {
+				"front": {
+					"brow_l": [
+						0.34765625,
+						0.52734375,
+						0.08984375,
+						0.0859375
+					],
+					"brow_r": [
+						0.54296875,
+						0.48046875,
+						0.16796875,
+						0.125
+					],
+					"eye_l": [
+						0.26953125,
+						0.58984375,
+						0.17578125,
+						0.1796875
+					],
+					"eye_r": [
+						0.55078125,
+						0.53125,
+						0.21875,
+						0.23046875
+					],
+					"mouth": [
+						0.44140625,
+						0.80859375,
+						0.125,
+						0.07421875
+					]
+				},
+				"quarter": {
+					"brow_l": [
+						0.28125,
+						0.53515625,
+						0.06640625,
+						0.07421875
+					],
+					"brow_r": [
+						0.44921875,
+						0.5078125,
+						0.1953125,
+						0.1171875
+					],
+					"eye_l": [
+						0.21484375,
+						0.58984375,
+						0.140625,
+						0.1640625
+					],
+					"eye_r": [
+						0.453125,
+						0.578125,
+						0.26171875,
+						0.19921875
+					],
+					"mouth": [
+						0.3359375,
+						0.81640625,
+						0.125,
+						0.0625
+					]
+				},
+				"side": {
+					"brow_l": null,
+					"brow_r": [
+						0.2578125,
+						0.46484375,
+						0.1484375,
+						0.09375
+					],
+					"eye_l": null,
+					"eye_r": [
+						0.28125,
+						0.546875,
+						0.22265625,
+						0.19140625
+					],
+					"mouth": [
+						0.19140625,
+						0.76171875,
+						0.09375,
+						0.109375
+					]
+				}
+			},
+			"slots": [
+				{
+					"default": "open",
+					"fallback": "front",
+					"id": "eye_l",
+					"paint": "over",
+					"placement": "rect",
+					"transfer_variants": {
+						"open": {
+							"front": {
+								"column": 0.0,
+								"input": "eye_l_open_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									45.0,
+									46.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 1.0,
+								"input": "eye_l_open_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									36.0,
+									42.0
+								],
+								"row": 1.0
+							}
+						},
+						"closed": {
+							"front": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 0,
+								"row": 8,
+								"rect": [
+									69,
+									151,
+									45,
+									46
+								],
+								"input": "existing_closed_eye_front"
+							},
+							"quarter": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 1,
+								"row": 8,
+								"rect": [
+									55,
+									151,
+									36,
+									42
+								],
+								"input": "existing_closed_eye_quarter"
+							}
+						}
+					},
+					"variants": {
+						"open": {
+							"front": {
+								"column": 0.0,
+								"input": "eye_l_open_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									45.0,
+									46.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 1.0,
+								"input": "eye_l_open_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									36.0,
+									42.0
+								],
+								"row": 1.0
+							}
+						},
+						"closed": {
+							"front": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 0,
+								"row": 8,
+								"rect": [
+									69,
+									151,
+									45,
+									46
+								],
+								"input": "existing_closed_eye_front"
+							},
+							"quarter": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 1,
+								"row": 8,
+								"rect": [
+									55,
+									151,
+									36,
+									42
+								],
+								"input": "existing_closed_eye_quarter"
+							}
+						}
+					}
+				},
+				{
+					"default": "open",
+					"fallback": "front",
+					"id": "eye_r",
+					"paint": "over",
+					"placement": "rect",
+					"transfer_variants": {
+						"open": {
+							"front": {
+								"column": 2.0,
+								"input": "eye_r_open_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									56.0,
+									59.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 3.0,
+								"input": "eye_r_open_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									67.0,
+									51.0
+								],
+								"row": 1.0
+							},
+							"side": {
+								"column": 4.0,
+								"input": "eye_r_open_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									57.0,
+									49.0
+								],
+								"row": 1.0
+							}
+						},
+						"closed": {
+							"front": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 0,
+								"row": 8,
+								"rect": [
+									141,
+									136,
+									56,
+									59
+								],
+								"input": "existing_closed_eye_front"
+							},
+							"quarter": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 1,
+								"row": 8,
+								"rect": [
+									116,
+									148,
+									67,
+									51
+								],
+								"input": "existing_closed_eye_quarter"
+							},
+							"side": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 2,
+								"row": 8,
+								"rect": [
+									72,
+									140,
+									57,
+									49
+								],
+								"input": "existing_closed_eye_side"
+							}
+						}
+					},
+					"variants": {
+						"open": {
+							"front": {
+								"column": 2.0,
+								"input": "eye_r_open_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									56.0,
+									59.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 3.0,
+								"input": "eye_r_open_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									67.0,
+									51.0
+								],
+								"row": 1.0
+							},
+							"side": {
+								"column": 4.0,
+								"input": "eye_r_open_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									57.0,
+									49.0
+								],
+								"row": 1.0
+							}
+						},
+						"closed": {
+							"front": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 0,
+								"row": 8,
+								"rect": [
+									141,
+									136,
+									56,
+									59
+								],
+								"input": "existing_closed_eye_front"
+							},
+							"quarter": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 1,
+								"row": 8,
+								"rect": [
+									116,
+									148,
+									67,
+									51
+								],
+								"input": "existing_closed_eye_quarter"
+							},
+							"side": {
+								"atlas_path": "res://mini/projected2d/b_cutout/expressions/original_derived/atlas.png",
+								"column": 2,
+								"row": 8,
+								"rect": [
+									72,
+									140,
+									57,
+									49
+								],
+								"input": "existing_closed_eye_side"
+							}
+						}
+					}
+				},
+				{
+					"default": "original",
+					"fallback": "front",
+					"id": "brow_l",
+					"paint": "over",
+					"placement": "rect",
+					"transfer_variants": {
+						"original": {
+							"front": {
+								"column": 5.0,
+								"input": "brow_l_original_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									23.0,
+									22.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 6.0,
+								"input": "brow_l_original_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									17.0,
+									19.0
+								],
+								"row": 1.0
+							}
+						}
+					},
+					"variants": {
+						"original": {
+							"front": {
+								"column": 5.0,
+								"input": "brow_l_original_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									23.0,
+									22.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 6.0,
+								"input": "brow_l_original_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									17.0,
+									19.0
+								],
+								"row": 1.0
+							}
+						}
+					}
+				},
+				{
+					"default": "original",
+					"fallback": "front",
+					"id": "brow_r",
+					"paint": "over",
+					"placement": "rect",
+					"transfer_variants": {
+						"original": {
+							"front": {
+								"column": 7.0,
+								"input": "brow_r_original_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									43.0,
+									32.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 8.0,
+								"input": "brow_r_original_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									50.0,
+									30.0
+								],
+								"row": 1.0
+							},
+							"side": {
+								"column": 9.0,
+								"input": "brow_r_original_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									38.0,
+									24.0
+								],
+								"row": 1.0
+							}
+						}
+					},
+					"variants": {
+						"original": {
+							"front": {
+								"column": 7.0,
+								"input": "brow_r_original_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									43.0,
+									32.0
+								],
+								"row": 1.0
+							},
+							"quarter": {
+								"column": 8.0,
+								"input": "brow_r_original_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									50.0,
+									30.0
+								],
+								"row": 1.0
+							},
+							"side": {
+								"column": 9.0,
+								"input": "brow_r_original_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									38.0,
+									24.0
+								],
+								"row": 1.0
+							}
+						}
+					}
+				},
+				{
+					"default": "small",
+					"fallback": "front",
+					"id": "mouth",
+					"paint": "over",
+					"placement": "rect",
+					"transfer_variants": {
+						"small": {
+							"front": {
+								"column": 0.0,
+								"input": "mouth_small_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									32.0,
+									19.0
+								],
+								"row": 2.0
+							},
+							"quarter": {
+								"column": 1.0,
+								"input": "mouth_small_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									32.0,
+									16.0
+								],
+								"row": 2.0
+							},
+							"side": {
+								"column": 2.0,
+								"input": "mouth_small_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									24.0,
+									28.0
+								],
+								"row": 2.0
+							}
+						}
+					},
+					"variants": {
+						"small": {
+							"front": {
+								"column": 0.0,
+								"input": "mouth_small_front.png",
+								"rect": [
+									0.0,
+									0.0,
+									32.0,
+									19.0
+								],
+								"row": 2.0
+							},
+							"quarter": {
+								"column": 1.0,
+								"input": "mouth_small_quarter.png",
+								"rect": [
+									0.0,
+									0.0,
+									32.0,
+									16.0
+								],
+								"row": 2.0
+							},
+							"side": {
+								"column": 2.0,
+								"input": "mouth_small_side.png",
+								"rect": [
+									0.0,
+									0.0,
+									24.0,
+									28.0
+								],
+								"row": 2.0
+							}
+						}
+					}
+				}
+			],
+			"version": 1.0
+		},
+		"row_count": 4.0
+	},
+	"head_landmarks": [
+		[
+			0.375,
+			0.64,
+			0.69,
+			0.505,
+			0.805,
+			0.505,
+			0.875,
+			0.505,
+			0.955
+		],
+		[
+			0.26,
+			0.565,
+			0.68,
+			0.355,
+			0.81,
+			0.4,
+			0.882,
+			0.485,
+			0.96
+		],
+		[
+			0.24,
+			0.32,
+			0.66,
+			0.16,
+			0.78,
+			0.22,
+			0.85,
+			0.34,
+			0.94
+		],
+		[
+			0.37,
+			0.63,
+			0.65,
+			0.5,
+			0.78,
+			0.5,
+			0.88,
+			0.5,
+			0.96
+		],
+		[
+			0.37,
+			0.63,
+			0.65,
+			0.5,
+			0.78,
+			0.5,
+			0.88,
+			0.5,
+			0.96
+		]
+	],
+	"head_pitch_warp": {
+		"maximum": 60.0,
+		"reference": 15.0,
+		"strength": 0.48
+	},
+	"id": "b_four_view_split_hips_v2",
+	"joint_patches": {
+		"elbow": [
+			0.3,
+			0.22,
+			0.4,
+			0.065
+		],
+		"knee": [
+			0.3,
+			0.17,
+			0.4,
+			0.055
+		]
+	},
+	"layered2d_registration": "res://mini/layered2d/data/characters/adventurer/registration.json",
+	"neutral_stand": {
+		"hand_l": [
+			0.63,
+			1.7,
+			0.02
+		],
+		"hand_r": [
+			-0.63,
+			1.7,
+			0.02
+		],
+		"pole_arm_l": [
+			0.22,
+			-0.2,
+			-1.0
+		],
+		"pole_arm_r": [
+			-0.22,
+			-0.2,
+			-1.0
+		]
+	},
+	"notes": [
+		"Five authored directions for every module; single-5 is rear quarter left.",
+		"Opposite side is mirrored. Front expression registration remains unchanged."
+	],
+	"profile": {
+		"forearm": 0.27,
+		"head": 1.0,
+		"head_center_height": 0.45,
+		"hip_height": 0.878,
+		"hip_width": 0.17,
+		"neck": 0.05,
+		"shin": 0.33,
+		"shoulder": 0.275,
+		"thigh": 0.35,
+		"torso": 0.6,
+		"upper_arm": 0.29
+	},
+	"rounded_joins": {
+		"pelvis": true
+	},
+	"seam_fade": {
+		"pelvis": [
+			0.0,
+			0.12
+		],
+		"thigh": [
+			0.12,
+			0.0
+		]
+	},
+	"slices": {
+		"abdomen": [
+			0.0,
+			0.255
+		],
+		"boot": [
+			0.55,
+			1.0
+		],
+		"chest": [
+			0,
+			0.78
+		],
+		"elbow": [
+			0.24,
+			0.43
+		],
+		"forearm": [
+			0.29,
+			0.66
+		],
+		"hand": [
+			0.64,
+			1.0
+		],
+		"knee": [
+			0.24,
+			0.42
+		],
+		"pelvis": [
+			0.23,
+			0.78
+		],
+		"shin": [
+			0.32,
+			0.63
+		],
+		"thigh": [
+			0.08,
+			0.37
+		],
+		"upper_arm": [
+			0.0,
+			0.42
+		]
+	},
+	"source_directions": [
+		"front",
+		"front_three_quarter_left",
+		"left",
+		"back",
+		"back_three_quarter_left"
+	],
+	"sources": {
+		"arms": "res://mini/projected2d/b_cutout/processed/arms",
+		"heads": "res://mini/projected2d/b_cutout/processed/heads",
+		"legs": "res://mini/projected2d/b_cutout/processed/legs",
+		"lower_body": "res://mini/projected2d/b_cutout/processed/lower_body",
+		"upper_body": "res://mini/projected2d/b_cutout/processed/upper_body"
+	},
+	"surface": {
+		"abdomen": {
+			"offset": [
+				0,
+				0,
+				0
+			],
+			"radii": [
+				0.27,
+				0.062,
+				0.19
+			],
+			"row": 10.0
+		},
+		"boot": {
+			"offset": [
+				0.0,
+				0.025,
+				0.0
+			],
+			"radii": [
+				0.165,
+				0.14,
+				0.22
+			],
+			"row": 5.0
+		},
+		"chest": {
+			"offset": [
+				0,
+				0,
+				0
+			],
+			"radii": [
+				0.325,
+				0.265,
+				0.255
+			],
+			"row": 1.0
+		},
+		"elbow": {
+			"radii": [
+				0.088,
+				0.08,
+				0.09
+			],
+			"row": 13.0
+		},
+		"forearm": {
+			"row": 11.0,
+			"scale": [
+				0.78,
+				1.0,
+				0.78
+			]
+		},
+		"hand": {
+			"row": 6.0,
+			"scale": [
+				0.78,
+				0.8,
+				0.8
+			]
+		},
+		"head": {
+			"radii": [
+				0.576,
+				0.504,
+				0.441
+			],
+			"row": 0.0
+		},
+		"knee": {
+			"radii": [
+				0.066,
+				0.065,
+				0.065
+			],
+			"row": 14.0
+		},
+		"neck": {
+			"radii": [
+				0.09,
+				0.09,
+				0.09
+			],
+			"row": 7.0
+		},
+		"pelvis": {
+			"offset": [
+				0,
+				-0.01,
+				0
+			],
+			"radii": [
+				0.31,
+				0.155,
+				0.195
+			],
+			"row": 2.0
+		},
+		"shin": {
+			"row": 12.0,
+			"scale": [
+				0.77,
+				1.0,
+				0.8
+			]
+		},
+		"thigh": {
+			"row": 4.0,
+			"scale": [
+				0.66,
+				1.0,
+				0.7
+			]
+		},
+		"upper_arm": {
+			"row": 3.0,
+			"scale": [
+				0.76,
+				1.0,
+				0.77
+			]
+		}
+	},
+	"tile_size": 256.0,
+	"version": 2.0
+}

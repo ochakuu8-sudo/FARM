@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "template": "diagnostic_cutout_v1",
+  "characters": [
+    {"id":"teal","name":"ミナ / 青緑の探検服","coat":"#398e96","pants":"#354858","skin":"#efc39c","hair":"#754832","trim":"#edcf82","pattern":0},
+    {"id":"copper","name":"ルカ / 赤銅の探検服","coat":"#b66348","pants":"#344b55","skin":"#dca878","hair":"#333c58","trim":"#9fdbc8","pattern":1}
+  ]
+}

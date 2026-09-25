@@ -1,0 +1,98 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "ゴミ箱に頭から突っ込まれた女。1体だけの場面。上半身は逆さにゴミ箱の中、腰から下（腰・尻・脚）が口から丸出しで、ガニ股に開いた脚を左右交互にばたつかせ、尻を左右に振る。ゴミ箱は効果の層（character_assets/effects/trash_can.png、root の口の高さ1.08に置く。画像は口の縁が縦の真ん中なので、見下ろしの角度が変わっても口と腰がずれない）。口の奥側は描かないので腰は口から出て見える。蓋は床に転がしておく（trash_lid.png）。画像は game_v2/tools/trash_can_art.py の仮の絵。衣装 nude（尻を出す差分）は作者の素材が入ると効く。無い体型は元の服のまま。",
+	"version": 1,
+	"duration": 2.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 0},
+	"clips": {
+		"stuck": {
+			"duration": 2.4,
+			"base": "stand",
+			"poses": {
+				"open": {
+					"hip": [0, 3.95, 0],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.78, 5.25, -0.1],
+					"foot_r": [-0.78, 5.25, -0.1],
+					"pole_leg_l": [1, 0, 0.2],
+					"pole_leg_r": [-1, 0, 0.2],
+					"hand_l": [0.18, 2.75, 0.1],
+					"hand_r": [-0.18, 2.75, 0.1],
+					"pole_arm_l": [0.2, 0, 1],
+					"pole_arm_r": [-0.2, 0, 1]
+				},
+				"kick_l": {
+					"hip": [0, 3.95, 0],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.98, 5.6, -0.06],
+					"foot_r": [-0.62, 4.9, -0.12],
+					"pole_leg_l": [1, 0, 0.2],
+					"pole_leg_r": [-1, 0, 0.2],
+					"hand_l": [0.18, 2.75, 0.1],
+					"hand_r": [-0.18, 2.75, 0.1],
+					"pole_arm_l": [0.2, 0, 1],
+					"pole_arm_r": [-0.2, 0, 1],
+					"twist": 5,
+					"pelvis_roll": 4
+				},
+				"kick_r": {
+					"hip": [0, 3.95, 0],
+					"lean": 180,
+					"pelvis_pitch": 180,
+					"head_pitch": 0,
+					"foot_l": [0.62, 4.9, -0.12],
+					"foot_r": [-0.98, 5.6, -0.06],
+					"pole_leg_l": [1, 0, 0.2],
+					"pole_leg_r": [-1, 0, 0.2],
+					"hand_l": [0.18, 2.75, 0.1],
+					"hand_r": [-0.18, 2.75, 0.1],
+					"pole_arm_l": [0.2, 0, 1],
+					"pole_arm_r": [-0.2, 0, 1],
+					"twist": -5,
+					"pelvis_roll": -4
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "open"},
+				{"t": 0.22, "pose": "kick_l", "ease": "soft"},
+				{"t": 0.5, "pose": "open"},
+				{"t": 0.72, "pose": "kick_r", "ease": "soft"},
+				{"t": 1, "pose": "open"}
+			]
+		}
+	},
+	"actors": [{"id": "taker", "character": 0, "root": [0, 0, 0], "yaw": 0, "clip": "stuck", "outfit": "nude"}],
+	"constraints": [],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "root",
+			"image": "trash_lid",
+			"offset": [0.62, 0.02, 0.3],
+			"scale": 0.6,
+			"angle": 8,
+			"from": 0,
+			"to": 1
+		},
+		{
+			"actor": "taker",
+			"part": "root",
+			"image": "trash_can",
+			"offset": [0, 1.08, 0],
+			"scale": 0.85,
+			"from": 0,
+			"to": 1,
+			"angle_keys": [
+				{"t": 0, "angle": 0},
+				{"t": 0.22, "angle": 1.2},
+				{"t": 0.5, "angle": 0},
+				{"t": 0.72, "angle": -1.2},
+				{"t": 1, "angle": 0}
+			]
+		}
+	]
+}

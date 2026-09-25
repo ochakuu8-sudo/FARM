@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "presets": {
+    "compact": {
+      "label": "小柄",
+      "display_scale": 1.44,
+      "profile": {
+        "hip_height": 0.7568,
+        "torso": 0.4416,
+        "thigh": 0.2976,
+        "shin": 0.2784,
+        "upper_arm": 0.2496,
+        "forearm": 0.2304,
+        "shoulder": 0.2784,
+        "hip_width": 0.1536
+      }
+    },
+    "tall": {
+      "label": "長身",
+      "display_scale": 1.68,
+      "profile": {
+        "hip_height": 0.8264,
+        "torso": 0.4968,
+        "thigh": 0.3348,
+        "shin": 0.3132,
+        "upper_arm": 0.2808,
+        "forearm": 0.2592,
+        "shoulder": 0.3132,
+        "hip_width": 0.1728
+      }
+    }
+  }
+}

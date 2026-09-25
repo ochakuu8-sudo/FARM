@@ -1,0 +1,109 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "仰向け（lie_back）で脚を上げて開いた冒険者の脚の間に、ゴブリンが膝立ちで入り、両膝をつかんで腰を前後させる。寝姿勢の作例。位相0が奥（腰が最も前）。",
+	"version": 1,
+	"duration": 1.0,
+	"check": {"measure": "goblin.wrist_l:taker.knee_r,goblin.pelvis:taker.pelvis", "phases": [0, 0.5], "view": 0},
+	"clips": {
+		"supine_legs_up": {
+			"duration": 1.0,
+			"base": "lie_back",
+			"poses": {
+				"in": {
+					"hip": [0, 0.62, 0.03],
+					"head_pitch": 34,
+					"spine_pitch": 6,
+					"foot_l": [0.7, 3.0, 0.55],
+					"foot_r": [-0.7, 3.0, 0.55],
+					"pole_leg_l": [0.7, 1, 0.2],
+					"pole_leg_r": [-0.7, 1, 0.2],
+					"hand_l": [0.8, 0.75, -0.9],
+					"hand_r": [-0.8, 0.75, -0.9]
+				},
+				"out": {
+					"hip": [0, 0.62, -0.03],
+					"head_pitch": 28,
+					"spine_pitch": 4,
+					"foot_l": [0.68, 2.95, 0.5],
+					"foot_r": [-0.68, 2.95, 0.5],
+					"pole_leg_l": [0.7, 1, 0.2],
+					"pole_leg_r": [-0.7, 1, 0.2],
+					"hand_l": [0.8, 0.75, -0.9],
+					"hand_r": [-0.8, 0.75, -0.9]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "out"},
+				{"t": 0.5, "pose": "out", "ease": "in"},
+				{"t": 1, "pose": "in"}
+			]
+		},
+		"kneel_thrust": {
+			"duration": 1.0,
+			"base": "kneel",
+			"poses": {
+				"in": {
+					"hip": [0, 1.0, 0.1],
+					"lean": 8,
+					"head_pitch": 10,
+					"pole_arm_l": [1, -0.5, -0.3],
+					"pole_arm_r": [-1, -0.5, -0.3]
+				},
+				"out": {
+					"hip": [0, 1.0, -0.12],
+					"lean": 16,
+					"head_pitch": 14,
+					"pole_arm_l": [1, -0.5, -0.3],
+					"pole_arm_r": [-1, -0.5, -0.3]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "in", "ease": "out"},
+				{"t": 0.5, "pose": "out", "ease": "in"},
+				{"t": 1, "pose": "in"}
+			]
+		}
+	},
+	"actors": [
+		{"id": "taker", "character": 0, "root": [0, 0, 0], "yaw": 120, "clip": "supine_legs_up"},
+		{"id": "goblin", "character": 1, "root": [0.2944, 0, -0.17], "yaw": -60, "clip": "kneel_thrust"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "joint:knee_r",
+					"follower_goal": "hand_l",
+					"follower_socket": "joint:wrist_l",
+					"offset": [0, 0.02, 0]
+				},
+				{
+					"leader_socket": "joint:knee_l",
+					"follower_goal": "hand_r",
+					"follower_socket": "joint:wrist_r",
+					"offset": [0, 0.02, 0]
+				}
+			]
+		}
+	],
+	"stages": {
+		"strong": {
+			"clips": {
+				"kneel_thrust": {
+					"poses": {
+						"out": {"hip": [0, 1.0, -0.18], "lean": 20}
+					}
+				},
+				"supine_legs_up": {
+					"poses": {
+						"out": {"hip": [0, 0.62, -0.05]}
+					}
+				}
+			}
+		}
+	},
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

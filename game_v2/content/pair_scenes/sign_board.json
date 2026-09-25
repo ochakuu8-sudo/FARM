@@ -1,0 +1,101 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "札を下げて晒す。後ろ手に縛られ、首から札（effects の sign。文言は作者が画像に書く）を下げて立たされる。うつむいて、落ち着かず重心を移す。斜め45°で正面（yaw 45）。",
+	"version": 1,
+	"duration": 2.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 2.4,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0, 2.04, 0],
+					"lean": 4,
+					"head_pitch": 22,
+					"foot_l": [0.18, 0.2, 0.04],
+					"foot_r": [-0.18, 0.2, 0.04],
+					"hand_l": [0.1, 1.9, -0.35],
+					"hand_r": [-0.1, 1.9, -0.35],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				},
+				"l": {
+					"hip": [0.05, 2.03, 0],
+					"lean": 4,
+					"head_pitch": 22,
+					"foot_l": [0.18, 0.2, 0.04],
+					"foot_r": [-0.18, 0.2, 0.04],
+					"hand_l": [0.1, 1.9, -0.35],
+					"hand_r": [-0.1, 1.9, -0.35],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4],
+					"pelvis_roll": 4,
+					"head_yaw": 15
+				},
+				"r": {
+					"hip": [-0.05, 2.03, 0],
+					"lean": 4,
+					"head_pitch": 28,
+					"foot_l": [0.18, 0.2, 0.04],
+					"foot_r": [-0.18, 0.2, 0.04],
+					"hand_l": [0.1, 1.9, -0.35],
+					"hand_r": [-0.1, 1.9, -0.35],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4],
+					"pelvis_roll": -4,
+					"head_yaw": -15
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.25, "pose": "l", "ease": "soft"},
+				{"t": 0.5, "pose": "a"},
+				{"t": 0.75, "pose": "r", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 45,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			]
+		}
+	],
+	"constraints": [],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "chest",
+			"image": "sign",
+			"offset": [0, -0.12, 0.2],
+			"scale": 0.8,
+			"facing": "front"
+		}
+	]
+}

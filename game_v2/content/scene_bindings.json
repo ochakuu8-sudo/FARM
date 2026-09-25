@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "bindings": [
+    {
+      "event_kind": "interaction.block_started",
+      "symbol": "足止め"
+    },
+    {
+      "event_kind": "interaction.trap_resolved",
+      "symbol": "罠 発動"
+    },
+    {
+      "event_kind": "outcome.captured",
+      "symbol": "捕獲 → 収容"
+    },
+    {
+      "event_kind": "outcome.defeated",
+      "symbol": "撃破"
+    },
+    {
+      "event_kind": "door.closed",
+      "symbol": "扉 閉鎖"
+    },
+    {
+      "event_kind": "action.disarm_started",
+      "symbol": "解除中"
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "捕獲方針のゴブリンの攻撃で再生する2体場面。冒険者は両腕を頭上で縛られ、ゴブリンが背後から胸をつかむ。露骨でない服の素材で構図と動きを作る。",
+	"version": 1,
+	"duration": 1.6,
+	"clips": {
+		"bound_struggle": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0.05, 2.0, 0.02],
+					"lean": -2,
+					"twist": -12,
+					"head_yaw": 20,
+					"head_pitch": 4,
+					"hand_l": [0.42, 3.86, -0.2],
+					"hand_r": [-0.42, 3.86, -0.2],
+					"pole_arm_l": [1, 0.2, -0.4],
+					"pole_arm_r": [-1, 0.2, -0.4],
+					"wrist_l": [0, 0, -10],
+					"wrist_r": [0, 0, 10]
+				},
+				"b": {
+					"hip": [-0.05, 1.97, 0.06],
+					"lean": -14,
+					"twist": 12,
+					"head_yaw": -18,
+					"head_pitch": 16,
+					"hand_l": [0.38, 3.84, -0.24],
+					"hand_r": [-0.46, 3.82, -0.18],
+					"pole_arm_l": [1, 0.2, -0.4],
+					"pole_arm_r": [-1, 0.2, -0.4],
+					"wrist_l": [0, 0, -10],
+					"wrist_r": [0, 0, 10]
+				}
+			},
+			"keys": [{"t": 0, "pose": "a"}, {"t": 0.5, "pose": "b"}, {"t": 1, "pose": "a"}]
+		},
+		"grope_from_behind": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"p": {
+					"hip": [0, 1.76, 0.04],
+					"lean": 6,
+					"hand_l": [0.4, 2.5, 0.5],
+					"hand_r": [-0.4, 2.5, 0.5],
+					"hand_dir_l": [0, 0.3, 1],
+					"hand_dir_r": [0, 0.3, 1],
+					"pole_arm_l": [1, -0.3, -0.6],
+					"pole_arm_r": [-1, -0.3, -0.6],
+					"head_pitch": -10,
+					"head_yaw": -10
+				},
+				"q": {
+					"hip": [0, 1.7, 0.1],
+					"lean": 12,
+					"hand_l": [0.4, 2.5, 0.5],
+					"hand_r": [-0.4, 2.5, 0.5],
+					"hand_dir_l": [0.3, -0.2, 1],
+					"hand_dir_r": [-0.3, -0.2, 1],
+					"pole_arm_l": [1, -0.3, -0.6],
+					"pole_arm_r": [-1, -0.3, -0.6],
+					"head_pitch": -14,
+					"head_yaw": -18
+				}
+			},
+			"keys": [{"t": 0, "pose": "p"}, {"t": 0.5, "pose": "q"}, {"t": 1, "pose": "p"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "bound_struggle",
+			"secondary": {
+				"chest": {"lag": 0.1, "damping": 0.6, "amount": 1, "max_offset": 0.04}
+			},
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.4,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.7,
+					"face": {"preset": "neutral"}
+				}
+			]
+		},
+		{"id": "goblin", "character": 1, "root": [-0.38, 0, -0.15], "yaw": 90, "clip": "grope_from_behind"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_l",
+					"follower_socket": "part:hand_l",
+					"offset": [0.16, 0.0, 0.22],
+					"offset_space": "leader_local"
+				},
+				{
+					"leader_socket": "part:chest",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset": [-0.16, 0.0, 0.22],
+					"offset_space": "leader_local"
+				}
+			]
+		}
+	],
+	"stages": {
+		"strong": {
+			"clips": {
+				"bound_struggle": {
+					"poses": {
+						"b": {"lean": -18, "twist": 16, "head_pitch": 22, "hip": [-0.07, 1.95, 0.08]}
+					}
+				}
+			}
+		}
+	},
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": [{"before": "goblin.head", "after": "taker.head", "start": 0, "end": 1}]
+}

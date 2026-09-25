@@ -1,0 +1,8 @@
+{
+	"_note": "付属物の登録（docs/素材制作テンプレート/付属物の規格.md）。kind は weapon / shield / ears / tail / groin。dir は画像のフォルダ（single-1〜N.png）。canvas・anchor・views・states・sway は種類の既定値（game_v2/animation/props.gd の KIND_DEFAULTS）を上書きするときだけ書く。scale は1ピクセルの world 長さ（既定 0.003）。今の絵は仮（game_v2/tools/prop_placeholders.py）。",
+	"sword_iron": {"kind": "weapon", "name": "鉄の剣", "dir": "res://character_assets/props/weapon/sword_iron"},
+	"buckler": {"kind": "shield", "name": "木の盾", "dir": "res://character_assets/props/shield/buckler"},
+	"ears_cat": {"kind": "ears", "name": "猫耳", "dir": "res://character_assets/props/ears/cat"},
+	"tail_cat": {"kind": "tail", "name": "猫の尻尾", "dir": "res://character_assets/props/tail/cat"},
+	"groin_goblin": {"kind": "groin", "name": "ゴブリン", "dir": "res://character_assets/props/groin/goblin"}
+}

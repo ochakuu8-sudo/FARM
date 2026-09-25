@@ -1,0 +1,104 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "ブリッジ。仰向けから手と足で体を持ち上げたブリッジを保たされ、腹の上に燭台（effects の candle）を載せられる。落とさないよう震え、腰が沈みかけてはこらえる。",
+	"version": 1,
+	"duration": 1.6,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0, 2.1, 0],
+					"lean": -116,
+					"spine_pitch": -22,
+					"pelvis_pitch": -50,
+					"head_pitch": -45,
+					"foot_l": [0.32, 0.2, 0.75],
+					"foot_r": [-0.32, 0.2, 0.75],
+					"pole_leg_l": [0.4, 1, 0.5],
+					"pole_leg_r": [-0.4, 1, 0.5],
+					"hand_l": [0.36, 0.13, -1.05],
+					"hand_r": [-0.36, 0.13, -1.05],
+					"pole_arm_l": [1, 0.3, 0.3],
+					"pole_arm_r": [-1, 0.3, 0.3]
+				},
+				"b": {
+					"hip": [0, 2.02, 0.02],
+					"lean": -112,
+					"spine_pitch": -22,
+					"pelvis_pitch": -50,
+					"head_pitch": -45,
+					"foot_l": [0.32, 0.2, 0.75],
+					"foot_r": [-0.32, 0.2, 0.75],
+					"pole_leg_l": [0.4, 1, 0.5],
+					"pole_leg_r": [-0.4, 1, 0.5],
+					"hand_l": [0.36, 0.13, -1.05],
+					"hand_r": [-0.36, 0.13, -1.05],
+					"pole_arm_l": [1, 0.3, 0.3],
+					"pole_arm_r": [-1, 0.3, 0.3]
+				},
+				"c": {
+					"hip": [0.03, 2.07, 0],
+					"lean": -116,
+					"spine_pitch": -22,
+					"pelvis_pitch": -50,
+					"head_pitch": -45,
+					"foot_l": [0.32, 0.2, 0.75],
+					"foot_r": [-0.32, 0.2, 0.75],
+					"pole_leg_l": [0.4, 1, 0.5],
+					"pole_leg_r": [-0.4, 1, 0.5],
+					"hand_l": [0.36, 0.13, -1.05],
+					"hand_r": [-0.36, 0.13, -1.05],
+					"pole_arm_l": [1, 0.3, 0.3],
+					"pole_arm_r": [-1, 0.3, 0.3]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.25, "pose": "b", "ease": "soft"},
+				{"t": 0.5, "pose": "a"},
+				{"t": 0.75, "pose": "c", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 135,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude",
+			"secondary": {
+				"chest": {"lag": 0.1, "damping": 0.55, "amount": 1, "max_offset": 0.04}
+			}
+		}
+	],
+	"constraints": [],
+	"effects": [{"actor": "taker", "part": "abdomen", "image": "candle", "offset": [0, 0.0, 0.2], "scale": 0.55}]
+}

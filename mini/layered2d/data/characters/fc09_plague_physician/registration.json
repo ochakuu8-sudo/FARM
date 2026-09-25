@@ -1,0 +1,703 @@
+{
+	"config": {
+		"atlas_path": "res://mini/projected2d/b_cutout/atlas.png",
+		"display_name": "uaãt",
+		"display_scale": 1.6,
+		"face": {
+			"atlas_path": "res://mini/layered2d/data/characters/fc09_plague_physician/atlas.png",
+			"mode": "baked",
+			"registered": {
+				"presets": {
+					"neutral": {}
+				},
+				"slots": []
+			}
+		},
+		"head_landmarks": [
+			[
+				0.34,
+				0.66,
+				0.45,
+				0.5,
+				0.62,
+				0.5,
+				0.79,
+				0.5,
+				0.9
+			],
+			[
+				0.34,
+				0.66,
+				0.45,
+				0.5,
+				0.62,
+				0.5,
+				0.79,
+				0.5,
+				0.9
+			],
+			[
+				0.34,
+				0.66,
+				0.45,
+				0.5,
+				0.62,
+				0.5,
+				0.79,
+				0.5,
+				0.9
+			],
+			[
+				0.34,
+				0.66,
+				0.45,
+				0.5,
+				0.62,
+				0.5,
+				0.79,
+				0.5,
+				0.9
+			],
+			[
+				0.34,
+				0.66,
+				0.45,
+				0.5,
+				0.62,
+				0.5,
+				0.79,
+				0.5,
+				0.9
+			]
+		],
+		"head_pitch_warp": {
+			"maximum": 60.0,
+			"reference": 15.0,
+			"strength": 0.48
+		},
+		"id": "fc09_plague_physician_five_view_v1",
+		"joint_patches": {
+			"elbow": [
+				0.3,
+				0.22,
+				0.4,
+				0.065
+			],
+			"knee": [
+				0.3,
+				0.17,
+				0.4,
+				0.055
+			]
+		},
+		"neck_sample": [
+			0.46,
+			0.94,
+			0.07,
+			0.03
+		],
+		"neck_skin": [
+			0.976,
+			0.878,
+			0.792
+		],
+		"neutral_stand": {
+			"hand_l": [
+				0.63,
+				1.7,
+				0.02
+			],
+			"hand_r": [
+				-0.63,
+				1.7,
+				0.02
+			],
+			"pole_arm_l": [
+				0.22,
+				-0.2,
+				-1.0
+			],
+			"pole_arm_r": [
+				-0.22,
+				-0.2,
+				-1.0
+			]
+		},
+		"notes": [
+			"素体規格の試しの取り込み（2026-09-25）。顔は固定の表情。"
+		],
+		"profile": {
+			"forearm": 0.27,
+			"head": 1.0,
+			"head_center_height": 0.45,
+			"hip_height": 0.878,
+			"hip_width": 0.17,
+			"neck": 0.05,
+			"shin": 0.33,
+			"shoulder": 0.275,
+			"thigh": 0.35,
+			"torso": 0.6,
+			"upper_arm": 0.29
+		},
+		"rounded_joins": {
+			"pelvis": true
+		},
+		"seam_fade": {
+			"pelvis": [
+				0.0,
+				0.12
+			],
+			"thigh": [
+				0.12,
+				0.0
+			]
+		},
+		"slices": {
+			"abdomen": [
+				0.0,
+				0.255
+			],
+			"boot": [
+				0.55,
+				1.0
+			],
+			"chest": [
+				0.0,
+				0.78
+			],
+			"elbow": [
+				0.24,
+				0.43
+			],
+			"forearm": [
+				0.29,
+				0.66
+			],
+			"hand": [
+				0.64,
+				1.0
+			],
+			"knee": [
+				0.24,
+				0.42
+			],
+			"pelvis": [
+				0.23,
+				0.78
+			],
+			"shin": [
+				0.32,
+				0.63
+			],
+			"thigh": [
+				0.08,
+				0.37
+			],
+			"upper_arm": [
+				0.0,
+				0.42
+			]
+		},
+		"source_directions": [
+			"front",
+			"front_three_quarter_left",
+			"left",
+			"back",
+			"back_three_quarter_left"
+		],
+		"sources": {
+			"arms": "res://character_assets/production/flatcel_30/09_plague_physician/arms",
+			"heads": "res://character_assets/production/flatcel_30/09_plague_physician/heads",
+			"legs": "res://character_assets/production/flatcel_30/09_plague_physician/legs",
+			"lower_body": "res://character_assets/production/flatcel_30/09_plague_physician/lower_body",
+			"upper_body": "res://character_assets/production/flatcel_30/09_plague_physician/upper_body"
+		},
+		"surface": {
+			"abdomen": {
+				"offset": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"radii": [
+					0.27,
+					0.062,
+					0.19
+				],
+				"row": 10.0
+			},
+			"boot": {
+				"offset": [
+					0.0,
+					0.025,
+					0.0
+				],
+				"radii": [
+					0.165,
+					0.14,
+					0.22
+				],
+				"row": 5.0
+			},
+			"chest": {
+				"offset": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"radii": [
+					0.325,
+					0.265,
+					0.255
+				],
+				"row": 1.0
+			},
+			"elbow": {
+				"radii": [
+					0.088,
+					0.08,
+					0.09
+				],
+				"row": 13.0
+			},
+			"forearm": {
+				"row": 11.0,
+				"scale": [
+					0.78,
+					1.0,
+					0.78
+				]
+			},
+			"hand": {
+				"row": 6.0,
+				"scale": [
+					0.78,
+					0.8,
+					0.8
+				]
+			},
+			"head": {
+				"radii": [
+					0.576,
+					0.504,
+					0.441
+				],
+				"row": 0.0
+			},
+			"knee": {
+				"radii": [
+					0.066,
+					0.065,
+					0.065
+				],
+				"row": 14.0
+			},
+			"neck": {
+				"radii": [
+					0.09,
+					0.09,
+					0.09
+				],
+				"row": 7.0
+			},
+			"pelvis": {
+				"offset": [
+					0.0,
+					-0.01,
+					0.0
+				],
+				"radii": [
+					0.31,
+					0.155,
+					0.195
+				],
+				"row": 2.0
+			},
+			"shin": {
+				"row": 12.0,
+				"scale": [
+					0.77,
+					1.0,
+					0.8
+				]
+			},
+			"thigh": {
+				"row": 4.0,
+				"scale": [
+					0.66,
+					1.0,
+					0.7
+				]
+			},
+			"upper_arm": {
+				"row": 3.0,
+				"scale": [
+					0.76,
+					1.0,
+					0.77
+				]
+			}
+		},
+		"tile_size": 256.0,
+		"version": 2.0
+	},
+	"cuts": {
+		"abdomen": [
+			0.0,
+			0.255
+		],
+		"boot": [
+			0.55,
+			1.0
+		],
+		"chest": [
+			0.0,
+			0.78
+		],
+		"elbow": [
+			0.24,
+			0.43
+		],
+		"forearm": [
+			0.29,
+			0.66
+		],
+		"hand": [
+			0.64,
+			1.0
+		],
+		"knee": [
+			0.24,
+			0.42
+		],
+		"pelvis": [
+			0.23,
+			0.78
+		],
+		"shin": [
+			0.32,
+			0.63
+		],
+		"thigh": [
+			0.08,
+			0.37
+		],
+		"upper_arm": [
+			0.0,
+			0.42
+		]
+	},
+	"references": {
+		"arms": [
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					81,
+					8,
+					94,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					66,
+					8,
+					123,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					76,
+					8,
+					103,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					82,
+					8,
+					91,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					92,
+					9,
+					72,
+					238
+				]
+			}
+		],
+		"heads": [
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					8.0,
+					36.0,
+					240.0,
+					183.0
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					8.0,
+					31.0,
+					240.0,
+					194.0
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					8.0,
+					32.0,
+					240.0,
+					192.0
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					8.0,
+					34.0,
+					240.0,
+					188.0
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					18.0,
+					34.0,
+					220.0,
+					188.0
+				]
+			}
+		],
+		"legs": [
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					83,
+					8,
+					90,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					72,
+					9,
+					111,
+					238
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					65,
+					9,
+					125,
+					238
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					81,
+					8,
+					94,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					83,
+					9,
+					89,
+					238
+				]
+			}
+		],
+		"lower_body": [
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					9,
+					30,
+					238,
+					195
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					9,
+					23,
+					238,
+					209
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					30,
+					9,
+					196,
+					238
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					9,
+					29,
+					238,
+					198
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					29,
+					29,
+					197,
+					198
+				]
+			}
+		],
+		"upper_body": [
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					26,
+					8,
+					204,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					25,
+					8,
+					205,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					47,
+					8,
+					161,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					20,
+					8,
+					216,
+					240
+				]
+			},
+			{
+				"canvas": [
+					256,
+					256
+				],
+				"rect": [
+					35,
+					9,
+					186,
+					238
+				]
+			}
+		]
+	},
+	"version": 1
+}

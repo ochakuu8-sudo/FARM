@@ -1,0 +1,89 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "踏みつけ。土下座する女の頭をゴブリンが片足で踏みつけ、床へぐりぐりと押しつける。女は額を床にすりつけたまま震える。",
+	"version": 1,
+	"duration": 1.6,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"taker": {
+			"duration": 1.6,
+			"base": "all_fours",
+			"poses": {
+				"a": {
+					"hip": [0, 0.6, -0.4],
+					"lean": 90,
+					"spine_pitch": 14,
+					"head_pitch": 30,
+					"hand_l": [0.22, 0.13, 1.05],
+					"hand_r": [-0.22, 0.13, 1.05],
+					"pole_arm_l": [1, 0.2, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.5]
+				},
+				"b": {
+					"hip": [0, 0.6, -0.4],
+					"lean": 94,
+					"spine_pitch": 14,
+					"head_pitch": 34,
+					"hand_l": [0.22, 0.13, 1.05],
+					"hand_r": [-0.22, 0.13, 1.05],
+					"pole_arm_l": [1, 0.2, -0.5],
+					"pole_arm_r": [-1, 0.2, -0.5]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		},
+		"goblin": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0, 2.0, 0],
+					"lean": 6,
+					"head_pitch": 24,
+					"foot_l": [0.3, 0.2, -0.1],
+					"hand_l": [0.6, 2.0, -0.1],
+					"hand_r": [-0.6, 2.0, -0.1],
+					"pole_arm_l": [1, -0.3, 0.3],
+					"pole_arm_r": [-1, -0.3, 0.3]
+				}
+			},
+			"keys": [{"t": 0, "pose": "a"}, {"t": 1, "pose": "a"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "taker",
+			"face_keys": [{"t": 0.0, "face": {"preset": "blink"}}]
+		},
+		{"id": "goblin", "character": 1, "root": [0.93, 0, -0.1], "yaw": -110, "clip": "goblin"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:head",
+					"follower_goal": "foot_r",
+					"follower_socket": "sole_r",
+					"offset_space": "leader_local",
+					"offset_keys": [
+						{"t": 0, "offset": [0.0, 0.14, -0.02]},
+						{"t": 0.5, "offset": [0.03, 0.1, -0.02], "ease": "soft"},
+						{"t": 1, "offset": [0.0, 0.14, -0.02]}
+					]
+				}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": []
+}

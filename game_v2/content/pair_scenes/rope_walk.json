@@ -1,0 +1,108 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": []},
+	"_note": "股縄渡り。腰の高さに張られた縄（blocks の細い箱と柱）を跨がされ、後ろ手に縛られたまま爪先立ちで一歩ずつ進まされる。",
+	"version": 1,
+	"duration": 1.6,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"main": {
+			"duration": 1.6,
+			"base": "stand",
+			"poses": {
+				"a": {
+					"hip": [0, 1.98, 0],
+					"lean": 6,
+					"head_pitch": 10,
+					"foot_l": [0.3, 0.36, 0.15],
+					"foot_r": [-0.3, 0.36, -0.15],
+					"pole_leg_l": [0.3, 0, 1],
+					"pole_leg_r": [-0.3, 0, 1],
+					"hand_l": [0.1, 1.9, -0.36],
+					"hand_r": [-0.1, 1.9, -0.36],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				},
+				"b": {
+					"hip": [0, 2.0, 0],
+					"lean": 6,
+					"head_pitch": 18,
+					"foot_l": [0.3, 0.36, -0.15],
+					"foot_r": [-0.3, 0.36, 0.15],
+					"pole_leg_l": [0.3, 0, 1],
+					"pole_leg_r": [-0.3, 0, 1],
+					"hand_l": [0.1, 1.9, -0.36],
+					"hand_r": [-0.1, 1.9, -0.36],
+					"pole_arm_l": [1, 0, -0.4],
+					"pole_arm_r": [-1, 0, -0.4]
+				}
+			},
+			"keys": [
+				{"t": 0, "pose": "a", "ease": "soft"},
+				{"t": 0.5, "pose": "b", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "main",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.3,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.36,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude"
+		}
+	],
+	"constraints": [],
+	"blocks": [
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [0, 0.8, 0],
+			"yaw": 0,
+			"size": [2.2, 0.03, 0.03],
+			"color": "#b09a70",
+			"depth_bias": -0.02
+		},
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [0, 0, 1.12],
+			"yaw": 0,
+			"size": [0.1, 0.1, 1.0],
+			"color": "#5a3e26",
+			"depth_bias": 0.0
+		},
+		{
+			"actor": "taker",
+			"shape": "box",
+			"offset": [0, 0, -1.12],
+			"yaw": 0,
+			"size": [0.1, 0.1, 1.0],
+			"color": "#5a3e26",
+			"depth_bias": 0.0
+		}
+	]
+}

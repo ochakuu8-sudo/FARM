@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "sets": [
+    {"id":"upper.scout.study","revision":1,"name":"細身・上半身（基盤確認）","role":"upper","geometry_source":0,"profile":{},"surface":{"chest":{"multiplier":[0.94,1,0.92]},"abdomen":{"multiplier":[0.94,1,0.95]}},"waist":[0.25,0.33,0.16,0.23],"arm_clearance":0},
+    {"id":"upper.healer.study","revision":1,"name":"ふくよか・上半身（基盤確認）","role":"upper","geometry_source":0,"profile":{"shoulder":0.29},"surface":{"chest":{"multiplier":[1.23,1.04,1.27]},"abdomen":{"multiplier":[1.30,1.10,1.25]},"upper_arm":{"multiplier":[1.30,1,1.30]},"forearm":{"multiplier":[1.20,1,1.20]},"elbow":{"multiplier":[1.20,1,1.20]}},"waist":[0.30,0.39,0.19,0.27],"arm_clearance":0.045},
+    {"id":"lower.scout.study","revision":1,"name":"細身・下半身（基盤確認）","role":"lower","geometry_source":0,"profile":{},"surface":{},"waist":[0.25,0.34,0.16,0.24]},
+    {"id":"lower.healer.study","revision":1,"name":"ふくよか・下半身（基盤確認）","role":"lower","geometry_source":0,"profile":{"hip_width":0.19},"surface":{"pelvis":{"multiplier":[1.12,1.03,1.18]},"thigh":{"multiplier":[1.24,1,1.24]},"shin":{"multiplier":[1.14,1,1.14]}},"waist":[0.29,0.40,0.19,0.27]}
+  ]
+}

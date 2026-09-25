@@ -1,0 +1,126 @@
+{
+	"cast": {"taker": ["adventurer"], "partner": ["1"]},
+	"_note": "お馬さん。四つん這いの女の腰にゴブリンが跨って座り、左手で女の髪につないだ手綱（lines）を引き、右手で尻を叩いて這わせる（位相0.45で当たる）。",
+	"version": 1,
+	"duration": 1.4,
+	"check": {"phases": [0, 0.25, 0.5, 0.75], "view": 1},
+	"clips": {
+		"taker": {
+			"duration": 1.4,
+			"base": "all_fours",
+			"poses": {
+				"a": {"hip": [0, 1.0, 0], "lean": 88, "head_pitch": -55},
+				"l": {"hip": [0, 1.0, 0], "lean": 88, "head_pitch": -55, "hand_l": [0.47, 0.32, 1.1]},
+				"r": {"hip": [0, 1.0, 0], "lean": 88, "head_pitch": -55, "hand_r": [-0.47, 0.32, 1.1]},
+				"j": {"hip": [0, 1.04, 0.06], "lean": 88, "head_pitch": -70}
+			},
+			"keys": [
+				{"t": 0, "pose": "a"},
+				{"t": 0.2, "pose": "l", "ease": "soft"},
+				{"t": 0.45, "pose": "a", "ease": "out"},
+				{"t": 0.55, "pose": "j", "ease": "soft"},
+				{"t": 0.75, "pose": "r", "ease": "soft"},
+				{"t": 1, "pose": "a"}
+			]
+		},
+		"goblin": {
+			"duration": 1.4,
+			"base": "sit",
+			"poses": {
+				"a": {
+					"hip": [0, 1.4, 0.0],
+					"lean": -14,
+					"head_pitch": 8,
+					"foot_l": [0.5, 0.22, 0.2],
+					"foot_r": [-0.5, 0.22, 0.2],
+					"pole_leg_l": [1, 0, 0.6],
+					"pole_leg_r": [-1, 0, 0.6],
+					"hand_l": [0.2, 2.2, 0.75],
+					"pole_arm_l": [1, -0.3, -0.4],
+					"pole_arm_r": [-1, 0.2, -0.6]
+				}
+			},
+			"keys": [{"t": 0, "pose": "a"}, {"t": 1, "pose": "a"}]
+		}
+	},
+	"actors": [
+		{
+			"id": "taker",
+			"character": 0,
+			"root": [0, 0, 0],
+			"yaw": 90,
+			"clip": "taker",
+			"face_keys": [
+				{
+					"t": 0.0,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.45,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.51,
+					"face": {"preset": "neutral"}
+				},
+				{
+					"t": 0.8,
+					"face": {"preset": "blink"}
+				},
+				{
+					"t": 0.86,
+					"face": {"preset": "neutral"}
+				}
+			],
+			"outfit": "nude",
+			"press": {"from": "goblin", "parts": ["hand_r"], "radius": 0.14, "strength": 1.4, "max": 0.06}
+		},
+		{"id": "goblin", "character": 1, "root": [0.06, 0, 0], "yaw": 90, "clip": "goblin"}
+	],
+	"constraints": [
+		{
+			"leader": "taker",
+			"follower": "goblin",
+			"bindings": [
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "hand_r",
+					"follower_socket": "part:hand_r",
+					"offset_keys": [
+						{"t": 0, "offset": [-0.08, 1.18, 0.39]},
+						{"t": 0.16, "offset": [-0.1, 1.2, 0.39], "ease": "linear"},
+						{"t": 0.28, "offset": [-0.53, 0.88, 0.39], "ease": "linear"},
+						{"t": 0.38, "offset": [-0.38, 0.28, 0.29], "ease": "linear"},
+						{"t": 0.45, "offset": [-0.12, 0.13, 0.12]},
+						{"t": 0.53, "offset": [-0.14, 0.22, 0.16], "ease": "soft"},
+						{"t": 0.64, "offset": [-0.38, 0.28, 0.29], "ease": "soft"},
+						{"t": 0.82, "offset": [-0.53, 0.88, 0.39], "ease": "soft"},
+						{"t": 1, "offset": [-0.08, 1.18, 0.39]}
+					]
+				},
+				{
+					"leader_socket": "part:pelvis",
+					"follower_goal": "elbow_r",
+					"offset": [-0.4, 0.8, 0.6],
+					"tolerance": 0.3
+				}
+			]
+		}
+	],
+	"transition_markers": {"cycle_start": 0},
+	"layer_rules": [],
+	"effects": [
+		{
+			"actor": "taker",
+			"part": "pelvis",
+			"image": "slap",
+			"offset": [-0.1, 0.0, -0.2],
+			"from": 0.45,
+			"to": 0.6,
+			"fade": 0.04,
+			"scale": 0.5,
+			"pulse": 0.25
+		}
+	],
+	"lines": [{"from": "goblin.hand_l", "to": "taker.head", "color": "#6a4a2a", "width": 0.006, "sag": 0.04}]
+}
