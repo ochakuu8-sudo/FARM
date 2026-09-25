@@ -32,6 +32,8 @@ func _ready() -> void:
 	label=Label.new();label.position=Vector2(8,8);label.custom_minimum_size=Vector2(1180,0);label.autowrap_mode=TextServer.AUTOWRAP_ARBITRARY
 	label.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	var sb:=StyleBoxFlat.new();sb.bg_color=Color(0,0,0,0.78);sb.set_content_margin_all(10);label.add_theme_stylebox_override("normal",sb)
+	# 画面の UI とは別の層なので、文字は同梱のフォントを直接当てる（ブラウザ版は OS のフォントが無い）
+	label.add_theme_font_override("font",load("res://game/ui/fonts/NotoSansJP-sub.ttf"))
 	label.add_theme_font_size_override("font_size",20);label.add_theme_color_override("font_color",Color("f0e6c8"));add_child(label)
 	if OS.has_feature("web"):
 		gpu=str(JavaScriptBridge.eval("""(() => { try { const c=document.createElement('canvas').getContext('webgl2'); if(!c) return 'WebGL2 なし';
