@@ -29,6 +29,9 @@ var sounds: Dictionary={}
 
 func _ready() -> void:
 	G.main=self
+	# 診断の表示（ブラウザ版は ?diag=1、デスクトップは --diag）。エラーを拾うので最初に付ける。
+	var Diag=preload("res://game/core/diag.gd")
+	if Diag.wanted():add_child(Diag.new())
 	# スマホ（軽量）はフレームを30までにする（毎フレームの重さを半分にし、熱と電池を抑える）
 	if preload("res://game/core/perf.gd").lite:Engine.max_fps=30
 	G.settings=Save.load_settings()
