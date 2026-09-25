@@ -48,13 +48,25 @@ var ui_hidden:=false
 var panning:=false
 var pan_from:=Vector2.ZERO
 var press_at:=Vector2.ZERO
+# 地図の操作（マウスとタッチ）：左ボタン・1本指は、離したときに動いていなければ選ぶ、動かせば地図をずらす。
+# 2本指はつまんで拡大・縮小し、動かすとずらす。ホイールは指している所を中心に拡大・縮小。
+const ZOOM_MIN:=0.55
+const ZOOM_MAX:=4.4
+const DRAG_START:=14.0                # これより動いたら「ずらす」（選ばない）
+var left_down:=false
+var left_dragged:=false
+var left_at:=Vector2.ZERO
+var touches: Dictionary={}           # 指の番号 → 位置
+var pinch_dist:=0.0
+var pinch_mid:=Vector2.ZERO
+var zoom_box: Control
 
 func open(p: Dictionary) -> void:
 	var layer:=CanvasLayer.new();layer.layer=-5;add_child(layer)
 	map=RanchMap.new();layer.add_child(map)
 	map.screen_center=Vector2(953,540)
 	top=TopBar.new();top.help_topic="ranch";add_child(top)
-	build_left();build_right();build_bottom()
+	build_left();build_right();build_bottom();build_zoom_buttons()
 	G.main.changed.connect(refresh_all)
 	refresh_all()
 	var dbg: Dictionary=G.main.debug
@@ -572,6 +584,7 @@ func refresh_all() -> void:
 	sortie_button.tooltip_text=why if why!="" else "大陸の地図へ（スタミナ %d）"%int(G.state.stamina.now)
 	left_panel.visible=not ui_hidden
 	bottom_panel.visible=not ui_hidden
+	if zoom_box!=null:zoom_box.visible=not ui_hidden
 
 # ───────── 施設を見る・建てる ─────────
 func select_fac(u: int) -> void:
@@ -665,13 +678,36 @@ func _process(delta: float) -> void:
 		if mv!=Vector2.ZERO:map.pan_screen(-mv*delta*900.0)
 
 func _unhandled_input(e: InputEvent) -> void:
+	# 2本指：つまんで拡大・縮小、動かしてずらす（1本目の指はマウスの左ボタンとしても届く）
+	if e is InputEventScreenTouch:
+		if e.pressed:touches[e.index]=e.position
+		else:touches.erase(e.index)
+		if touches.size()>=2:
+			left_dragged=true   # つまんだ指を離しても「選ぶ」にしない
+			var pts: Array=touches.values()
+			pinch_dist=maxf(1.0,(pts[0] as Vector2).distance_to(pts[1]));pinch_mid=((pts[0] as Vector2)+(pts[1] as Vector2))*0.5
+		return
+	if e is InputEventScreenDrag:
+		touches[e.index]=e.position
+		if touches.size()>=2:
+			var pts2: Array=touches.values()
+			var a: Vector2=pts2[0];var b: Vector2=pts2[1]
+			var mid:=(a+b)*0.5;var dist:=maxf(1.0,a.distance_to(b))
+			map.pan_screen(mid-pinch_mid)
+			zoom_at(mid,dist/pinch_dist)
+			pinch_mid=mid;pinch_dist=dist
+		return
 	if e is InputEventMouseMotion:
 		var c: Vector2=map.cell_at_screen(e.position)
 		var cell:=Vector2i(int(floor(c.x)),int(floor(c.y)))
 		if cell!=map.hover_cell:
 			map.hover_cell=cell
 			if mode=="build":update_ghost()
-		if panning:
+		if touches.size()>=2:return
+		if left_down:
+			if not left_dragged and e.position.distance_to(left_at)>DRAG_START:left_dragged=true;pan_from=e.position
+			if left_dragged:map.pan_screen(e.position-pan_from);pan_from=e.position
+		elif panning:
 			map.pan_screen(e.position-pan_from);pan_from=e.position
 		elif e.button_mask&(MOUSE_BUTTON_MASK_RIGHT|MOUSE_BUTTON_MASK_MIDDLE)!=0 and e.position.distance_to(press_at)>6:
 			panning=true;pan_from=e.position
@@ -681,11 +717,16 @@ func _unhandled_input(e: InputEvent) -> void:
 			else:
 				if not panning and e.button_index==MOUSE_BUTTON_RIGHT:cancel()
 				panning=false
-		elif e.button_index==MOUSE_BUTTON_LEFT and e.pressed:
-			var c2: Vector2=map.cell_at_screen(e.position)
-			click_cell(Vector2i(int(floor(c2.x)),int(floor(c2.y))))
-		elif e.pressed and e.button_index==MOUSE_BUTTON_WHEEL_UP:map.zoom=minf(4.4,map.zoom*1.1)
-		elif e.pressed and e.button_index==MOUSE_BUTTON_WHEEL_DOWN:map.zoom=maxf(0.55,map.zoom/1.1)
+		elif e.button_index==MOUSE_BUTTON_LEFT:
+			if e.pressed:
+				left_down=true;left_dragged=false;left_at=e.position
+			elif left_down:
+				left_down=false
+				if not left_dragged:
+					var c2: Vector2=map.cell_at_screen(e.position)
+					click_cell(Vector2i(int(floor(c2.x)),int(floor(c2.y))))
+		elif e.pressed and e.button_index==MOUSE_BUTTON_WHEEL_UP:zoom_at(e.position,1.1)
+		elif e.pressed and e.button_index==MOUSE_BUTTON_WHEEL_DOWN:zoom_at(e.position,1.0/1.1)
 	elif e is InputEventKey and e.pressed and not e.echo:
 		match e.keycode:
 			KEY_Q:map.rotate_view(-1)
@@ -697,6 +738,24 @@ func _unhandled_input(e: InputEvent) -> void:
 				ui_hidden=not ui_hidden;refresh_all()
 			KEY_1:set_mode("view")
 			KEY_2:set_mode("build")
+
+## 画面の点 at を動かさずに拡大・縮小する（ピンチ・ホイール・ボタン）。
+func zoom_at(at: Vector2,factor: float) -> void:
+	var before: Vector2=map.cell_at_screen(at)
+	map.zoom=clampf(map.zoom*factor,ZOOM_MIN,ZOOM_MAX)
+	var after: Vector2=map.cell_at_screen(at)
+	map.cam+=before-after
+	map.cam_goal=Vector2(-1,-1)
+
+## タッチの端末には拡大・縮小のボタンを出す（地図の右下）。
+func build_zoom_buttons() -> void:
+	if not DisplayServer.is_touchscreen_available() and not "--touch" in OS.get_cmdline_user_args():return
+	zoom_box=Ui.vbox(10);zoom_box.position=Vector2(BOTTOM.end.x-96,BOTTOM.position.y-178);add_child(zoom_box)
+	for z in [["＋",1.35],["－",1.0/1.35]]:
+		var f: float=z[1]
+		var b:=Ui.button(str(z[0]),func():zoom_at(map.screen_center,f),30)
+		b.custom_minimum_size=Vector2(80,76);b.focus_mode=Control.FOCUS_NONE
+		zoom_box.add_child(b)
 
 func cancel() -> void:
 	if not held.is_empty():release_hold();return
